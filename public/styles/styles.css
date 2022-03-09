@@ -1,0 +1,151 @@
+html { font-size: 15px; }
+html, body { margin: 0; padding: 0; min-height: 100%; }
+body { 
+
+	height:100%; 
+	display: flex; 
+	flex-direction: column;
+	background: oldlace;
+	padding: 20px;
+	font-family: Helvetica, Arial, Sans-Serif;
+}
+.referer-warning {
+  background: black;
+  box-shadow: 0 2px 5px rgba(0,0,0, 0.5);
+  padding: 0.75em;
+  color: white;
+  text-align: center;
+  font-family: var(--cp-font-family);
+  line-height: 1.2;
+  font-size: 1rem;
+  position: relative;
+  z-index: 2;
+}
+.referer-warning h1 { font-size: 1.2rem; margin: 0; }
+.referer-warning a { color: #56bcf9; } /* $linkColorOnBlack */
+
+
+#app {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 60px);
+  grid-auto-rows: 60px;
+  grid-gap: 15px;
+  justify-content: center;
+  perspective: 800px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+i.fas {
+  font-size: 40px;
+  color: #333;
+}
+
+.victoryState {
+  grid-column-start: 1;
+  grid-column-end: -1;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card {
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 5px 5px 0 0 #333;
+  cursor: pointer;
+  animation: flipUp 0.3s forwards;
+}
+.card i {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+.card.down {
+  animation: flipDown 0.3s forwards;
+}
+.card.down:after,
+.card.down:before{ content:”\03a3″; }
+.card.down i {
+  opacity: 0;
+}
+.card.matched {
+  animation: matching 0.1s forwards;
+}
+
+@keyframes flipDown {
+  0% {
+    background: #fff;
+    transform: rotateY(0deg);
+    box-shadow: 5px 5px 0 0 #333;
+  }
+  100% {
+    background: #73847f;
+    transform: rotateY(180deg);
+    box-shadow: -5px 5px 0 0 #333;
+  }
+}
+@keyframes flipUp {
+  0% {
+    background: #73847f;
+    transform: rotateY(180deg);
+    box-shadow: -5px 5px 0 0 #333;
+  }
+  100% {
+    background: #fff;
+    transform: rotateY(0deg);
+    box-shadow: 5px 5px 0 0 #333;
+  }
+}
+@keyframes matching {
+  0% {
+    background: #fff;
+  }
+  100% {
+    background: lightpink;
+  }
+}
+
+.mem-icon{
+	
+	height:50px;
+	width:50px;
+	background-size:50px;
+	background-image: url("../img/cards.png");
+}
+
+.mem-icon.pomme-rouge	{	background-position : 0px 0px;		}	
+.mem-icon.banane		{	background-position : 0px -50px;	}	
+.mem-icon.orange		{	background-position : 0px -100px;	}
+.mem-icon.citron-vert	{	background-position : 0px -150px;	}
+.mem-icon.goyave		{	background-position : 0px -200px;	}
+.mem-icon.abricot		{	background-position : 0px -250px;	}
+.mem-icon.citron-jaune	{	background-position : 0px -300px;	}
+.mem-icon.fraise		{	background-position : 0px -350px;	}
+.mem-icon.pomme-verte	{	background-position : 0px -400px;	}
+.mem-icon.peche			{	background-position : 0px -450px;	}
+.mem-icon.raisin		{	background-position : 0px -500px;	}
+.mem-icon.pasteque		{	background-position : 0px -550px;	}
+.mem-icon.prune			{	background-position : 0px -600px;	}
+.mem-icon.poire			{	background-position : 0px -650px;	}
+.mem-icon.cerise-rouge	{	background-position : 0px -700px;	}
+.mem-icon.framboise		{	background-position : 0px -750px;	}
+.mem-icon.mangue		{	background-position : 0px -800px;	}
+.mem-icon.cerise-jaune	{	background-position : 0px -850px;	}
+
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#myBar {
+  width: 0;
+  height: 30px;
+  background-color: #04AA6D;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
