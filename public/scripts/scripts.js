@@ -38,7 +38,9 @@ const checkMatch = icons => {
 var tryCount = 0 ;
 var progress = 0 ;
 var totalSeconds = 0;
-var timerLaunch = false ;
+var interval;
+var minutes = 1;
+var seconds = 5;
 
 new Vue({
   el: "#app",
@@ -69,7 +71,7 @@ new Vue({
     },
 
     // record game ...
-    gameRecord:function() {
+    gameRecord() {
 
           nom = prompt("Votre nom ?");
 
@@ -112,30 +114,57 @@ new Vue({
     }, 
 	
 	// gestion du chronometre...
-	setTime:function ()
-        {
-			if(timerLaunch == false){
-             if (this.cardCount.cardsMatched !== this.cards.length) {
-				 ++totalSeconds;
-				 timerLaunch = true;
-			 }
-			}
-            document.getElementById("seconds").innerHTML = pad(totalSeconds%60);
-            document.getElementById("minutes").innerHTML = pad(parseInt(totalSeconds/60));
-			
-			function pad(val)
-			{
-				var valString = val + "";
-				if(valString.length < 2)
-				{
-					return "0" + valString;
-				}
-				else
-				{
-					return valString;
-				}
-			}
-        }
+	setTime ()
+    {
+             ++totalSeconds;
+    },
+
+      frame() {
+
+          if(progress < percent){
+              progress++;
+              document.getElementById("myBar").style.width = progress + "%";
+              document.getElementById("myBar").innerHTML = progress  + "%";
+          }
+      },
+
+      countdown() {
+          interval = setInterval(function() {
+
+              if(seconds == 0) {
+                  if(minutes == 0) {
+                      //el.innerHTML = "countdown's over!";
+                      clearInterval(interval);
+                      return;
+                  } else {
+                      minutes--;
+                      seconds = 60;
+                  }
+              }
+
+              var minute_text ;
+              var second_text;
+
+              if(minutes >= 10) {
+                  minute_text = minutes ;
+              } else if(minutes < 10 && minutes > 0) {
+                  minute_text = "0"+minutes ;
+              } else {
+                  minute_text = '00';
+              }
+
+              if(seconds >= 10) {
+                  second_text = seconds ;
+              } else if(seconds < 10 && seconds > 0) {
+                  second_text = "0"+seconds ;
+              } else {
+                  second_text = '00';
+              }
+
+              document.getElementById('countdown').innerHTML = minute_text + ':' + second_text ;
+              seconds--;
+          }, 1000);
+      }
 
         
   },
@@ -147,7 +176,7 @@ new Vue({
   },
   computed: {
     // make a count of cards up and cards matched, keep icons of cards to check in array
-    cardCount: function () {
+    cardCount () {
       let cardUpCount = 0;
       let cardMatchedCount = 0;
       let icons = [];
@@ -164,24 +193,17 @@ new Vue({
 	  				  
 		document.getElementById("tryCount").innerHTML = tryCount+" essais";
 
-		setInterval(frame, 100);
+		setInterval(this.frame, 100);
 
-		function frame() {
+		this.countdown();
 
-			if(progress < percent){
-				progress++;
-				document.getElementById("myBar").style.width = progress + "%";
-				document.getElementById("myBar").innerHTML = progress  + "%";
-			}
-		}
-	  
       return {
         cardsUp: cardUpCount,
         cardsMatched: cardMatchedCount,
         icons: icons };
     },
     // update victory state
-    victory: function () {
+    victory () {
       if (this.cardCount.cardsMatched === this.cards.length) {
 	  
 		this.setTime();
