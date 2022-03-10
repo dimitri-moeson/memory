@@ -16,7 +16,11 @@
     </p>
 
     <div id="tryCount"></div>
-    <div id="timer"></div>
+    <div id="countdown"></div>
+
+    <div id="timer">
+        <em id="minutes"></em>:<em id="seconds"></em>
+    </div>
 </div>
 
 <form id="form-game" method="post" action="?p=ladder" >
