@@ -9,6 +9,7 @@
             Nom : <?php echo $ladder->getNom(); ?><br/>
             Timer : <?php echo $ladder->getTimer()->format("i:s");?><br/>
             Essais : <?php echo $ladder->getTry();?><br/>
+            Statut : <?php echo $ladder->getStatus();?><br/>
             Date : <?php echo $ladder->getDateCreate()->format("d/m/Y - H:i:s"); ?><br/>
         </li>
         <br/>

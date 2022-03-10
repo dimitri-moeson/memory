@@ -2,8 +2,8 @@
 		const icons = [
 
 			'mem-icon pomme-rouge',
-/**			'mem-icon orange',
-			'mem-icon banane',
+            'mem-icon orange',
+/**			'mem-icon banane',
 			'mem-icon citron-vert',
 			'mem-icon goyave',
 			'mem-icon abricot',
@@ -76,6 +76,7 @@ new Vue({
           document.getElementById("input-nom").value = nom ;
             document.getElementById("input-timer").value = totalSeconds ;
         document.getElementById("input-try").value = tryCount ;
+        document.getElementById("input-status").value = status ;
 
         document.getElementById("form-game").submit();
 

@@ -22,6 +22,7 @@ class DefaultController extends Controller
             $ladd->setTimer(GlobalData::getInstance()->get('timer'));
             $ladd->setTry(GlobalData::getInstance()->get('try'));
             $ladd->setNom(GlobalData::getInstance()->get('nom'));
+            $ladd->setStatus(GlobalData::getInstance()->get('status'));
 
             $ladd->save();
 

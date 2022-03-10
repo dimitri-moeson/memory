@@ -8,6 +8,7 @@ class Ladder extends Entity
     public $timer ;
     public $try ;
     public $nom ;
+    public $status ;
 
     /**
      * @return \DateTime
@@ -38,6 +39,14 @@ class Ladder extends Entity
     }
 
     /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
      * @param mixed $timer
      */
     public function setTimer($timer)
@@ -59,6 +68,14 @@ class Ladder extends Entity
     public function setNom($nom)
     {
         $this->nom = $nom;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
     }
 
     /**

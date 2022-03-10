@@ -8,13 +8,15 @@
 
 
     <p class="victoryState" v-if="victory">
-        <!--button v-on:click="cardsShuffle"> Refresh ?</button-->
         <button class="btn btn-primary" v-on:click="gameRecord">Enregistrer</button>
     </p>
 
-    <div></div>
+    <p class="failureState" v-if="failure">
+        <button class="btn btn-primary" v-on:click="gameRecord">Perdu!</button>
+    </p>
+
     <div id="tryCount"></div>
-    <div id="timer"><label id="minutes">00</label>:<label id="seconds">00</label></div>
+    <div id="timer"></div>
 </div>
 
 <form id="form-game" method="post" action="?p=ladder" >
@@ -22,6 +24,7 @@
     <input type="hidden" id="input-timer" name="timer"/>
     <input type="hidden" id="input-try" name="try"/>
     <input type="hidden" id="input-nom" name="nom"/>
+    <input type="hidden" id="input-status" name="status"/>
     <input type="hidden" id="record" name="record" value="1"/>
 
 </form>
