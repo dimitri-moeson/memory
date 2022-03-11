@@ -25,16 +25,16 @@
 
 <body translate="no" >
 
-<h1>Memoriel</h1>
+    <header>
+        <h1>Memoriel</h1>
+    </header>
+    <ul>
+        <li <?php echo $view ==="game" ? "class='active'" : "" ?> ><a href="?p=default.game">Jeu</a></li>
+        <li <?php echo $view ==="ladder" ? "class='active'" : "" ?> ><a href="?p=default.ladder">Classement</a></li>
 
-<ul>
-    <li><a href="?p=default.game">Jeu</a></li>
-    <li><a href="?p=default.ladder">Classement</a></li>
+    </ul>
 
-</ul>
-
-<?php echo $content ?>
-
+    <?php echo $content ?>
 
 </body>
 

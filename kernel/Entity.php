@@ -113,7 +113,7 @@ class Entity
     {
         $vars = get_object_vars($this);
 
-        $table =  strtolower(str_replace("\\app\\model\\","", get_called_class() ));
+        $table =  strtolower(str_replace("app\\model\\","", get_called_class() ));
 
         $attributes = array();
         $values = array();
@@ -148,7 +148,7 @@ class Entity
      */
     public function delete()
     {
-        $table =  strtolower(str_replace("\\app\\model\\","", get_called_class() ));
+        $table =  strtolower(str_replace("app\\model\\","", get_called_class() ));
 
         $statement = "update `".$table."` set `date_delete` = :date_delete where `id` = :id and `date_delete` is null ; ";
 
@@ -168,6 +168,6 @@ class Entity
     {
         $exec = App::getInstance()->getDB()->query_init();
 
-        return $exec->prepare($statement,true, $values , true );
+        return $exec->prepare($statement,"".get_called_class(),true, $values , true );
     }
 }

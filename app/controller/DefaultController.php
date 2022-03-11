@@ -29,14 +29,11 @@ class DefaultController extends Controller
             $ladd->setNom(GlobalData::getInstance()->get('nom'));
             $ladd->setStatus(GlobalData::getInstance()->get('status'));
 
-            /**
-             * on enregistre le resultat de la partie joué
-             * @var Builder $ladd
-             */
-            Ladder::save($ladd);
+            /** on enregistre le resultat de la partie joué */
+            $ladd->save();
 
             /** on recharge la page */
-            header("location:?p=default.ladder");
+            $this->redirect("default.ladder");
         }
     }
 
@@ -48,7 +45,7 @@ class DefaultController extends Controller
         $ladd = Ladder::init();
 
         $this->ladders = $ladd::select('*')->order("timer","ASC")->order("try",'DESC')->execute();
-        $this->count = $ladd::count("id",true )->order("timer","ASC")->order("try",'DESC')->execute(true);
+        $this->count = $ladd::count("id",true  , 'counter')->order("timer","ASC")->order("try",'DESC')->execute(true);
     }
 
     /**

@@ -1,17 +1,30 @@
 
-<h2>Ladder</h2>
+<h2>Ladder <?php echo $count->counter." resultats" ?></h2>
 
-<ol>
+<table>
+
+    <thead>
+        <tr>
+            <th>Rang</th>
+            <th>Nom</th>
+            <th>Timer</th>
+            <th>Essais</th>
+            <th>Statut</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
     <?php /** @var app\model\Ladder $ladder */
-    foreach ($ladders as $ladder){ ?>
+    foreach ($ladders as $i => $ladder){ ?>
 
-        <li>
-            Nom : <?php echo $ladder->getNom(); ?><br/>
-            Timer : <?php echo $ladder->getTimer()->format("i:s");?><br/>
-            Essais : <?php echo $ladder->getTry();?><br/>
-            Statut : <?php echo $ladder->getStatus();?><br/>
-            Date : <?php echo $ladder->getDateCreate()->format("d/m/Y - H:i:s"); ?><br/>
-        </li>
-        <br/>
+        <tr>
+            <th><?php echo($i+1); ?></th>
+            <td><?php echo $ladder->getNom(); ?></td>
+            <td><?php echo $ladder->getTimer()->format("i:s");?></td>
+            <td><?php echo $ladder->getTry();?></td>
+            <td><?php echo $ladder->getStatus();?></td>
+            <td><?php echo $ladder->getDateCreate()->format("d/m/Y - H:i:s"); ?></td>
+        </tr>
     <?php } ?>
-</ol>
+    </tbody>
+</table>

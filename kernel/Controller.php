@@ -41,6 +41,18 @@ namespace kernel {
         }
 
         /**
+         * redirection PHP
+         * @param $location
+         */
+        protected function redirect($location){
+
+            header("location:?p=".$location);
+
+            die("redirection : ".$location);
+
+        }
+
+        /**
          * @param $p
          */
         public static function execute($p){
