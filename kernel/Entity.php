@@ -27,6 +27,7 @@
         }
 
         /**
+         * appel en static la Class Builder qui construit les requetes SQL
          * @param $name
          * @param $arguments
          * @return Builder
@@ -39,6 +40,7 @@
         }
 
         /**
+         * Initialise une instance vierge
          * @return Entity $entity
          */
         public static function init() : Entity
@@ -57,6 +59,7 @@
         }
 
         /**
+         * convertit un string date en objet DateTime
          * @param $_date
          * @return \DateTime
          */
@@ -136,7 +139,7 @@
         }
 
         /**
-         * rend obsolete l'enregistrement en base
+         * ajoute une date de suppression et rend obsolete l'enregistrement en base
          * @return array
          * @throws Exception
          */
