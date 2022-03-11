@@ -46,7 +46,7 @@ class Controller
 
         list($cont_name,$action) = explode(".",$p);
 
-        $controller_name = "app\\Controller\\".$cont_name."Controller";
+        $controller_name = "\\app\\Controller\\".ucfirst($cont_name)."Controller";
 
         $controller = new $controller_name();
 
