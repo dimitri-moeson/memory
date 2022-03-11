@@ -18,23 +18,12 @@ class Entity
     protected $date_create ;
 
     /**
-     * @var \DateTime $date_update
-     */
-    protected $date_update ;
-
-    /**
-     * @var \DateTime $date_delete
-     */
-    protected $date_delete ;
-
-    /**
      * Entity constructor.
      */
     protected function __construct()
     {
         $this->date_create = $this->datetime("date_create");
     }
-
 
     /**
      * @param $name
@@ -43,9 +32,7 @@ class Entity
      */
     public static function __callStatic($name, $arguments)
     {
-        $class = get_called_class();
-
-        $query = new Builder( $class );
+        $query = new Builder( get_called_class() );
 
         return call_user_func_array(array( $query , $name), $arguments) ;
     }
@@ -119,4 +106,68 @@ class Entity
         return $this->date_delete;
     }
 
+    /**
+     * @return array
+     */
+    public function save()
+    {
+        $vars = get_object_vars($this);
+
+        $table =  strtolower(str_replace("\\app\\model\\","", get_called_class() ));
+
+        $attributes = array();
+        $values = array();
+
+        foreach( $vars as $ch => $va)
+        {
+            if ($va !== null && $ch !== 'id' && $ch !== 'date_create')
+            {
+                $attributes[$ch] = " `".$ch."` = :".$ch."" ;
+                $values[$ch] = $va ;
+            }
+        }
+
+        $set = implode(",",$attributes);
+
+        if($this->getId() == 0 ){
+
+            $statement = "insert into ".$table." set ".$set." ; " ;
+
+        }else {
+
+            $statement = "update `".$table."` set ".$set." where `id` = :id and `date_delete` is null ; ";
+            $values['id'] = $this->getId() ;
+        }
+
+        return $this->alter($statement,$values);
+
+    }
+
+    /**
+     * @return array
+     */
+    public function delete()
+    {
+        $table =  strtolower(str_replace("\\app\\model\\","", get_called_class() ));
+
+        $statement = "update `".$table."` set `date_delete` = :date_delete where `id` = :id and `date_delete` is null ; ";
+
+        $values['id'] = $this->getId() ;
+        $values['date_delete'] = date("Y-m-d H:i:s") ;
+
+        return $this->alter($statement,$values);
+    }
+
+    /**
+     * @param $statement
+     * @param $values
+     * @return array
+     * @throws \Exception
+     */
+    private function alter($statement,$values)
+    {
+        $exec = App::getInstance()->getDB()->query_init();
+
+        return $exec->prepare($statement,true, $values , true );
+    }
 }

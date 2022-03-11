@@ -70,6 +70,6 @@ class Database
 
     public function query_init()
     {
-        return new QueryExec($this->getPDO());
+        return new Executer($this->getPDO());
     }
 }

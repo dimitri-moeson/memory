@@ -22,14 +22,13 @@ namespace kernel {
          * - Autoloader
          * - Base de données
          */
-        public function load(){
-
+        public function load()
+        {
             require 'Autoloader.php';
 
             \kernel\Autoloader::register();
 
             $this->getDB();
-
         }
 
         /**
@@ -52,8 +51,8 @@ namespace kernel {
          */
         public function getDB()
         {
-            if(is_null($this->db)){
-
+            if(is_null($this->db))
+            {
                 $config = Config::getInstance(ROOT."/config/db.ini");
 
                 $this->db = new Database(

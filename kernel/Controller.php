@@ -1,57 +1,59 @@
-<?php namespace kernel;
+<?php
+namespace kernel {
 
-/**
- * Created by PhpStorm.
- * User: admin
- * Date: 09/03/2022
- * Time: 11:44
- */
-
-class Controller
-{
     /**
-     * @param $view
-     * @param array $variables
+     * Class Controller
+     * @package kernel
      */
-    protected function render($view){
+    class Controller
+    {
+        /**
+         * @param $view
+         * @param array $variables
+         */
+        protected function render($view){
+
+            /**
+             * on execute et on stocke la requete dans la variable $content
+             */
+            ob_start();
+
+            /**
+             * on extrait/decompile les donnees
+             */
+            extract(get_object_vars($this));
+
+            require ROOT."/app/view/".$view.".php";
+            /**
+             * on ferme le stockage et on recupere le contenu
+             */
+            $content = ob_get_clean();
+
+            /**
+             * $content est affiché dans le template HTML
+             */
+            require ROOT."/app/view/template/default.php";
+
+            /**
+             * on bloque tout une fois le résultat final obtenu
+             */
+            die();
+        }
 
         /**
-         * on execute et on stocke la requete dans la variable $content
+         * @param $p
          */
-        ob_start();
+        public static function execute($p){
 
-        /**
-         * on extrait/decompile les donnees
-         */
-        extract(get_object_vars($this));
+            list($cnt_name,$action) = explode(".",$p);
 
-        require ROOT."/app/view/".$view.".php";
-        /**
-         * on ferme le stockage et on recupere le contenu
-         */
-        $content = ob_get_clean();
+            $controller_name = "\\app\\Controller\\".ucfirst($cnt_name)."Controller";
 
-        /**
-         * $content est affiché dans le template HTML
-         */
-        require ROOT."/app/view/template/default.php";
+            $controller = new $controller_name();
 
-        /**
-         * on bloque tout une fois le résultat final obtenu
-         */
-        die();
-    }
+            $controller->$action();
 
-    public static function execute($p){
-
-        list($cont_name,$action) = explode(".",$p);
-
-        $controller_name = "\\app\\Controller\\".ucfirst($cont_name)."Controller";
-
-        $controller = new $controller_name();
-
-        $controller->$action();
-
-        $controller->render($action);
+            $controller->render($action);
+        }
     }
 }

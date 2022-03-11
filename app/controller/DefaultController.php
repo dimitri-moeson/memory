@@ -31,7 +31,7 @@ class DefaultController extends Controller
 
             /**
              * on enregistre le resultat de la partie joué
-             * @var Builder Ladder
+             * @var Builder $ladd
              */
             Ladder::save($ladd);
 
@@ -43,9 +43,12 @@ class DefaultController extends Controller
     function ladder(){
 
         /**
-         * @var Builder Ladder
+         * @var Builder $ladd
          */
-        $this->ladders = Ladder::select('*')->order("timer","ASC")->order("try",'DESC')->execute();
+        $ladd = Ladder::init();
+
+        $this->ladders = $ladd::select('*')->order("timer","ASC")->order("try",'DESC')->execute();
+        $this->count = $ladd::count("id",true )->order("timer","ASC")->order("try",'DESC')->execute(true);
     }
 
     /**

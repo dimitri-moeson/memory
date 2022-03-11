@@ -1,26 +1,28 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: admin
- * Date: 09/03/2022
- * Time: 23:46
- */
-
 namespace kernel;
-
 
 use PDO;
 use PDOStatement;
 
-class QueryExec
+/**
+ * Class Executer
+ * @package kernel
+ */
+class Executer
 {
     private $pdo;
 
+    /**
+     * Executer constructor.
+     * @param PDO $pdo
+     */
     public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo ;
     }
+
     /**
+     * execute une requete simple
      * @param $statement
      * @param $class_name
      * @param bool $one
@@ -28,8 +30,6 @@ class QueryExec
      */
     public function query( $statement, $class_name = null , $one = false  )
     {
-        echo $statement;
-
         $req = $this->pdo->query($statement);
 
         $this->fetchMode($req, $class_name);
@@ -38,6 +38,7 @@ class QueryExec
     }
 
     /**
+     * execute une requete preparée
      * @param $statement
      * @param $class_name
      * @param bool $one
@@ -47,18 +48,13 @@ class QueryExec
      */
     public function prepare($statement, $class_name = null ,  $one = false, $attrib = [] , $isModif = false  )
     {
-        echo $statement;
-
         $req = $this->pdo->prepare($statement);
 
         $this->bind($req , $attrib ,$isModif ) ;
 
         $res = $req->execute();
 
-        if($isModif)
-        {
-            return $res ;
-        }
+        if($isModif) return $res ;
 
         $this->fetchMode($req, $class_name);
 
@@ -99,7 +95,7 @@ class QueryExec
     }
 
     /**
-     * on recupere les resultats ous la class saisie en parametres
+     * on recupere les resultats sous la class saisie en parametres
      * si pas de class en parametre, on recupere le resultat dans la class parent Entity
      * @param PDOStatement $req
      * @param null $class_name
@@ -120,8 +116,7 @@ class QueryExec
      */
     private function result( PDOStatement $req,  $one = false )
     {
-        if($one)
-            return $req->fetch();
+        if($one) return $req->fetch();
 
         return $req->fetchAll();
     }

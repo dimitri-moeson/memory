@@ -15,6 +15,9 @@ require ROOT."/kernel/App.php";
  */
 App::getInstance()->load();
 
+/**
+ * recuperation de la requete utilisateur
+ */
 $p = GlobalData::getInstance()->get('p','default.index');
 
 /**
