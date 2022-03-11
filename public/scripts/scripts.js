@@ -39,7 +39,6 @@
     };
 
     var tryCount = 0 ;
-    var progress = 0 ;
 
     var maxTimes = 150 , restTimes = 150 ;
 
@@ -95,7 +94,7 @@
             /** record game ... **/
             gameRecord() {
 
-                var nom = prompt("Votre nom ?");
+                var nom = prompt("Victoie !"+"\n"+"Votre nom ?");
 
                 var totalSeconds =  parseInt(maxTimes) - parseInt(restTimes) ;
 
@@ -140,31 +139,30 @@
                 }
             },
 
-            /** progress bar */
-            frame() {
-
-                if(progress < percent)
-                {
-                    progress++;
-                    document.getElementById("myBar").style.width = progress + "%";
-                    document.getElementById("myBar").innerHTML = progress  + "%";
-                }
-            },
-
-            /** gestion du chronometre et compte à rebours **/
+            /** gestion du chronometre et de la progress bar **/
             countdown() {
 
                 interval = setInterval( function() {
 
                     restTimes--;
 
-                    document.getElementById("countdown").innerHTML = pad(parseInt(restTimes / 60)) + ":" + pad(restTimes % 60) ; //+ "<br/>=>" + restTimes;
+                    var totalSeconds =  parseInt(maxTimes) - parseInt(restTimes) ;
+
+                    /** progress bar */
+                    var progress = (totalSeconds/maxTimes)*100;
+                    document.getElementById("myBar").style.width = progress + "%";
+
+                     if(progress > 66 ) document.getElementById("myBar").style.backgroundColor = 'red';
+                else if(progress >= 33 && progress < 66 ) document.getElementById("myBar").style.backgroundColor = 'orange';
+                else if(progress > 0 && progress < 33 ) document.getElementById("myBar").style.backgroundColor = 'green';
+
+                    document.getElementById("myBar").innerHTML = pad(parseInt(restTimes / 60)) + ":" + pad(restTimes % 60) ;
 
                     if (restTimes === 0) {
 
                         clearInterval(interval);
 
-                        var nom = prompt("Fin du temps imparti ! Votre nom ?");
+                        var nom = prompt("Fin du temps imparti !"+"\n"+" Votre nom ?");
 
                         var totalSeconds =  parseInt(maxTimes) - parseInt(restTimes) ;
 

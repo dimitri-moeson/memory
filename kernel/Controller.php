@@ -46,14 +46,17 @@
          */
         protected function redirect($location){
 
+            header("Status: 301 Moved Permanently", false, 301);
             header("location:?p=".$location);
-
+            exit();
             die("redirection : ".$location);
 
         }
 
         /**
          * execute la commande de l'utilisateur
+         * appel du controller et de l'action
+         * puis generation et affichage du rendu HTML
          * @param $p
          */
         public static function execute($p){
@@ -62,6 +65,9 @@
 
             $controller_name = "\\app\\Controller\\".ucfirst($cnt_name)."Controller";
 
+            /**
+             * @var Controller $controller
+             */
             $controller = new $controller_name();
 
             $controller->$action();

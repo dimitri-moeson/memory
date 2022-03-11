@@ -13,7 +13,7 @@ CREATE TABLE `ladder` (
   `try` int(11) NOT NULL,
   `nom` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
-  `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_update` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `date_delete` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
