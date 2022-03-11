@@ -77,12 +77,4 @@ class Ladder extends Entity
     {
         $this->status = $status;
     }
-
-    /**
-     * @return array
-     */
-    public function ordering()
-    {
-        return $this->query("select * from ladder where date_delete is null order by timer ASC, try DESC ;" );
-    }
 }

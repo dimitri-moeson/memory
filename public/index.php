@@ -15,19 +15,13 @@ require ROOT."/kernel/App.php";
  */
 App::getInstance()->load();
 
-$p = GlobalData::getInstance()->get('p','home');
-/**
- * controller principale
- */
-$controller = new \app\controller\DefaultController();
-
-    if($p === "game")   $controller->game();
-elseif($p === "ladder") $controller->ladder();
-else                    $controller->index();
+$p = GlobalData::getInstance()->get('p','default.index');
 
 /**
- * on bloque tout une fois le résultat final obtenu
+ * execution du controller principale
  */
-die();
+\kernel\Controller::execute($p);
+
+
 
 ?>

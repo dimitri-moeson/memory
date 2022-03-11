@@ -28,8 +28,8 @@
 <h1>Memoriel</h1>
 
 <ul>
-    <li><a href="?p=game">Jeu</a></li>
-    <li><a href="?p=ladder">Classement</a></li>
+    <li><a href="?p=default.game">Jeu</a></li>
+    <li><a href="?p=default.ladder">Classement</a></li>
 
 </ul>
 

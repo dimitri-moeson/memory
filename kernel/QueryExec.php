@@ -28,6 +28,8 @@ class QueryExec
      */
     public function query( $statement, $class_name = null , $one = false  )
     {
+        echo $statement;
+
         $req = $this->pdo->query($statement);
 
         $this->fetchMode($req, $class_name);
@@ -45,6 +47,8 @@ class QueryExec
      */
     public function prepare($statement, $class_name = null ,  $one = false, $attrib = [] , $isModif = false  )
     {
+        echo $statement;
+
         $req = $this->pdo->prepare($statement);
 
         $this->bind($req , $attrib ,$isModif ) ;

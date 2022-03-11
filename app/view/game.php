@@ -23,7 +23,7 @@
     </div>
 </div>
 
-<form id="form-game" method="post" action="?p=ladder" >
+<form id="form-game" method="post" action="?p=default.save" >
 
     <input type="hidden" id="input-timer" name="timer"/>
     <input type="hidden" id="input-try" name="try"/>

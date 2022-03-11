@@ -2,53 +2,66 @@
 
 
 use app\model\Ladder;
+use kernel\Builder;
 use kernel\Controller;
 use kernel\GlobalData;
 
 class DefaultController extends Controller
 {
-    function ladder(){
-
+    /**
+     *
+     */
+    function save()
+    {
         /**
-         * @var Ladder $ladd
+         *  si on soumet un formulaire
          */
-        $ladd = Ladder::init();
-
-        if(GlobalData::getInstance()->submitted())
-        {
+        if (GlobalData::getInstance()->submitted()) {
             /**
-             * on enregistre le resultat de la partie joué
+             * on instancie un objet ladder
+             * @var Ladder $ladd
              */
+            $ladd = Ladder::init();
+
+            /** on affecte les données du formulaire à l'objet Ladder */
             $ladd->setTimer(GlobalData::getInstance()->get('timer'));
             $ladd->setTry(GlobalData::getInstance()->get('try'));
             $ladd->setNom(GlobalData::getInstance()->get('nom'));
             $ladd->setStatus(GlobalData::getInstance()->get('status'));
 
-            $ladd->save();
-
             /**
-             * on recharge la page
+             * on enregistre le resultat de la partie joué
+             * @var Builder Ladder
              */
-            header("location:?p=ladder");
+            Ladder::save($ladd);
+
+            /** on recharge la page */
+            header("location:?p=default.ladder");
         }
-
-        $ladders = $ladd->ordering();
-
-        /**
-         * on compresse/compile les donnees
-         */
-        $this->render( "ladder", compact( 'ladders' , 'ladd' ));
     }
 
+    function ladder(){
+
+        /**
+         * @var Builder Ladder
+         */
+        $this->ladders = Ladder::select('*')->order("timer","ASC")->order("try",'DESC')->execute();
+    }
+
+    /**
+     *
+     */
     function index(){
 
         $this->render(  "game");
 
     }
 
+    /**
+     *
+     */
     function game(){
 
         $this->render(  "game");
-
     }
 }
