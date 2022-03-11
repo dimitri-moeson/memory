@@ -5,7 +5,7 @@ use PDO;
 use PDOStatement;
 
 /**
- * Class Executer
+ * Class Executer pour executer et traiter les requetes SQL
  * @package kernel
  */
 class Executer
@@ -54,11 +54,11 @@ class Executer
 
         $res = $req->execute();
 
-        if($isModif) return $res ;
+        if($isModif === true ) return $res ;
 
         $this->fetchMode($req, $class_name);
 
-        return $this->result( $req, $class_name, $one);
+        return $this->result( $req, $one);
     }
 
     /**
@@ -116,8 +116,9 @@ class Executer
      */
     private function result( PDOStatement $req,  $one = false )
     {
-        if($one) return $req->fetch();
-
-        return $req->fetchAll();
+        if($one)
+            return $req->fetch();
+        else
+            return $req->fetchAll();
     }
 }

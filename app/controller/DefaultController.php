@@ -1,11 +1,14 @@
 <?php namespace app\controller ;
 
-
 use app\model\Ladder;
 use kernel\Builder;
 use kernel\Controller;
 use kernel\GlobalData;
 
+/**
+ * Class DefaultController
+ * @package app\controller
+ */
 class DefaultController extends Controller
 {
     /**
@@ -37,6 +40,9 @@ class DefaultController extends Controller
         }
     }
 
+    /**
+     *
+     */
     function ladder(){
 
         /**
@@ -44,8 +50,19 @@ class DefaultController extends Controller
          */
         $ladd = Ladder::init();
 
-        $this->ladders = $ladd::select('*')->order("timer","ASC")->order("try",'DESC')->execute();
-        $this->count = $ladd::count("id",true  , 'counter')->order("timer","ASC")->order("try",'DESC')->execute(true);
+        $this->ladders = $ladd::select('*')
+            ->where("status = :_status")
+            ->where("nom is not null")
+            ->order("timer","ASC")
+            ->order("try",'DESC')
+            ->execute( false , array("_status" => "victory")); //
+
+        $this->count = $ladd::count("id",true  , 'counter')
+            ->where("status = :_status")
+            ->where("nom is not null")
+            ->order("timer","ASC")
+            ->order("try",'DESC')
+            ->execute( true , array("_status" => "victory"));
     }
 
     /**
@@ -53,7 +70,8 @@ class DefaultController extends Controller
      */
     function index(){
 
-        $this->render(  "game");
+        $this->ladder();
+        $this->render(  "ladder");
 
     }
 

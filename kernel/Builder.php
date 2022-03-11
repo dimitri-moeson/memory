@@ -9,7 +9,7 @@
 namespace kernel;
 
 /**
- * Class Fluent Builder
+ * Class Fluent Builder - construit les requetes SQL à partir de la class modele en parametre
  * @package kernel
  */
 class Builder
@@ -154,15 +154,15 @@ class Builder
      * @param bool $modif
      * @return array
      */
-    public function execute($one = false ,$attrib = null , $modif = false )
+    public function execute(  $one = false, $attrib = null, $modif = false )
     {
         $exec = App::getInstance()->getDB()->query_init();
 
-        if($attrib === null )
+        if($attrib == null )
         {
             return $exec->query( $this, self::$classname , $one );
         }
-        else
+        elseif(is_array($attrib))
         {
             return $exec->prepare($this, self::$classname , $one  , $attrib , $modif );
         }

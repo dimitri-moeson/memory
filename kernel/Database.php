@@ -4,7 +4,7 @@ namespace kernel;
 use \PDO;
 
 /**
- * Class Database
+ * Class Database connexion à la base de données
  * @package kernel
  */
 class Database
@@ -33,7 +33,7 @@ class Database
      * bien separer l'instanciation de l'objet et l'appel à la base
      * @return PDO
      */
-    private function getPDO()
+    private function getPDO() : PDO
     {
         /**
          * connexion unique à la base qui sera réutilisable
@@ -68,7 +68,7 @@ class Database
 
     }
 
-    public function query_init()
+    public function query_init() : Executer
     {
         return new Executer($this->getPDO());
     }

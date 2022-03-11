@@ -2,13 +2,13 @@
 namespace kernel;
 
 /**
- * Class Entity
+ * Class Entity pour gerer en objet les données de la database
  * @package kernel
  */
 class Entity
 {
     /**
-     * @var int $id
+     * @var integer $id
      */
     protected $id = null  ;
 
@@ -28,7 +28,7 @@ class Entity
     /**
      * @param $name
      * @param $arguments
-     * @return mixed
+     * @return Builder
      */
     public static function __callStatic($name, $arguments)
     {
@@ -38,9 +38,9 @@ class Entity
     }
 
     /**
-     * @return mixed Entity
+     * @return Entity $entity
      */
-    public static function init()
+    public static function init() : Entity
     {
         $class = get_called_class();
 
@@ -50,7 +50,7 @@ class Entity
     /**
      * @return integer Id
      */
-    public function getId()
+    public function getId() :int
     {
         return intval($this->id);
     }
@@ -59,7 +59,7 @@ class Entity
      * @param $_date
      * @return \DateTime
      */
-    private function datetime($_date)
+    private function datetime($_date) : \DateTime
     {
         $date =   \DateTime::createFromFormat("Y-m-d h:i:s", $this->$_date );
 
@@ -140,7 +140,6 @@ class Entity
         }
 
         return $this->alter($statement,$values);
-
     }
 
     /**

@@ -1,5 +1,6 @@
 
-<h2>Ladder <?php echo $count->counter." resultats" ?></h2>
+<h2>Ladder</h2>
+<h3><?php echo $count->counter." resultats" ?></h3>
 
 <table>
 
@@ -14,11 +15,14 @@
         </tr>
     </thead>
     <tbody>
-    <?php /** @var app\model\Ladder $ladder */
+    <?php
+
+    /** @var app\model\Ladder $ladder */
+
     foreach ($ladders as $i => $ladder){ ?>
 
         <tr>
-            <th><?php echo($i+1); ?></th>
+            <th><?php echo intval($i+1); ?></th>
             <td><?php echo $ladder->getNom(); ?></td>
             <td><?php echo $ladder->getTimer()->format("i:s");?></td>
             <td><?php echo $ladder->getTry();?></td>

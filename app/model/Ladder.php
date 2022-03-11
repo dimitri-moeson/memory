@@ -3,17 +3,33 @@ namespace app\model;
 
 use kernel\Entity;
 
+/**
+ * Class Ladder modele des données des joueurs et de leur parties en base
+ * @package app\model
+ */
 class Ladder extends Entity
 {
+    /**
+     * @var \DateTime $timer
+     */
     public $timer ;
+    /**
+     * @var integer $try
+     */
     public $try ;
+    /**
+     * @var string $nom
+     */
     public $nom ;
+    /**
+     * @var string $status
+     */
     public $status ;
 
     /**
      * @return \DateTime
      */
-    public function getTimer()
+    public function getTimer() : \DateTime
     {
         $date = new \DateTime();
 
@@ -23,25 +39,25 @@ class Ladder extends Entity
     }
 
     /**
-     * @return mixed
+     * @return integer
      */
-    public function getTry()
+    public function getTry(): int
     {
         return $this->try;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getNom()
+    public function getNom() :string
     {
         return $this->nom;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getStatus()
+    public function getStatus() :string
     {
         return $this->status;
     }

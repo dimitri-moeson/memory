@@ -11,16 +11,9 @@
         <button class="btn btn-primary" v-on:click="gameRecord">Enregistrer</button>
     </p>
 
-    <p class="failureState" v-if="failure">
-        <button class="btn btn-primary" v-on:click="gameRecord">Perdu!</button>
-    </p>
-
     <div id="tryCount"></div>
     <div id="countdown"></div>
 
-    <div id="timer">
-        <em id="minutes"></em>:<em id="seconds"></em>
-    </div>
 </div>
 
 <form id="form-game" method="post" action="?p=default.save" >

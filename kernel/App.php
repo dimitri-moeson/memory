@@ -18,6 +18,11 @@ namespace kernel {
         private $db ;
 
         /**
+         * @var array $settings du fichier .ini
+         */
+        private $settings = array();
+
+        /**
          * chargement des composant principaux & initialisation des variables
          * - Autoloader
          * - Base de données
@@ -45,6 +50,15 @@ namespace kernel {
         }
 
         /**
+         * Config constructor.
+         * @param $file
+         */
+        private function __construct()
+        {
+            $this->settings = parse_ini_file( ROOT."/config/db.ini", true); //require $file;
+        }
+
+        /**
          * Instance unique de Database
          * @return \kernel\Database
          * @throws \Exception
@@ -53,20 +67,36 @@ namespace kernel {
         {
             if(is_null($this->db))
             {
-                $config = Config::getInstance(ROOT."/config/db.ini");
-
                 $this->db = new Database(
 
-                    $config->getDB("db_name"),
-                    $config->getDB("db_user"),
-                    $config->getDB("db_pass"),
-                    $config->getDB("db_host"),
-                    $config->getDB("db_serv"),
-                    $config->getDB("db_char")
+                    $this->param("db_name"),
+                    $this->param("db_user"),
+                    $this->param("db_pass"),
+                    $this->param("db_host"),
+                    $this->param("db_serv"),
+                    $this->param("db_char")
 
                 );
             }
             return $this->db;
+        }
+
+        /**
+         * @param $key
+         * @param $dom
+         * @return mixed
+         * @throws \Exception
+         */
+        public function param( $key,$dom = "database"){
+
+            $hasBase = array_key_exists($dom, $this->settings);
+            $hasKeys = array_key_exists($key, $this->settings[$dom]);
+
+            if (!$hasBase || !$hasKeys ) {
+                throw new \Exception("Missing config [$dom/$key] informations");
+            }
+
+            return $this->settings[$dom][$key];
         }
     }
 }

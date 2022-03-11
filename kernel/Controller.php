@@ -2,7 +2,7 @@
 namespace kernel {
 
     /**
-     * Class Controller
+     * Class Controller execute les requetes utilisateurs et affiche les résultat
      * @package kernel
      */
     class Controller

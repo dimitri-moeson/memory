@@ -1,14 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: admin
- * Date: 09/03/2022
- * Time: 20:32
- */
-
 namespace kernel;
 
-
+/**
+ * Class GlobalData recupere les infos de formulaire our d'URL
+ * @package kernel
+ */
 class GlobalData
 {
     private static $_instance ;
@@ -36,9 +32,10 @@ class GlobalData
     }
 
     /**
+     * verifie si un formulaire a été envoyé
      * @return bool
      */
-    public function submitted()
+    public function submitted() :bool
     {
         if($this->method === 'POST')
             if(!empty($_POST))
@@ -50,7 +47,7 @@ class GlobalData
     /**
      * @return mixed
      */
-    public function content()
+    public function content() :array
     {
         if($this->method === 'POST')
             return $_POST;
@@ -62,8 +59,8 @@ class GlobalData
      * @param $key
      * @return bool
      */
-    public function exists($key){
-
+    public function exists($key):bool
+    {
         if($this->method === 'POST')
             if( isset($_POST[$key]) )
                 return array_key_exists($key, $_POST) ;
@@ -82,8 +79,8 @@ class GlobalData
      * @param null $default
      * @return null
      */
-    public function get($key , $default = null ){
-
+    public function get($key , $default = null ) : ?string
+    {
         if($this->method === 'POST')
             if(array_key_exists($key, $_POST))
                 return $_POST[$key];
@@ -100,24 +97,27 @@ class GlobalData
     /**
      * @param $key
      * @param $value
+     * return bool
      */
-    public function set($key, $value){
+    public function set($key, $value) :bool
+    {
 
         if($this->method === 'POST')
         {
             $_POST[$key] = $value ;
-            return;
+            return true ;
         }
 
         $_REQUEST[$key] = $value ;
-        return ;
+        return true ;
     }
 
     /**
      * @param $key
      * @return bool
      */
-    public function delete($key){
+    public function delete($key) :bool
+    {
 
         if ($this->exists($key)) {
 

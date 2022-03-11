@@ -1,9 +1,10 @@
+
     // Liste des balises CSS utilisant les illustrations
     const icons = [
 
         'mem-icon pomme-rouge',
         'mem-icon orange',
-/**			'mem-icon banane',
+		'mem-icon banane',
         'mem-icon citron-vert',
         'mem-icon goyave',
         'mem-icon abricot',
@@ -18,9 +19,11 @@
         'mem-icon cerise-rouge',
         'mem-icon framboise',
         'mem-icon mangue',
-        'mem-icon cerise-jaune'**/
+        'mem-icon cerise-jaune'
 
     ];
+
+
 
     // Duplicate elements of an array
     const duplicate = arr => {
@@ -37,12 +40,13 @@
 
     var tryCount = 0 ;
     var progress = 0 ;
-    var totalSeconds = 0;
-    var interval;
-    var minutes = 0;
-    var seconds = 5;
+
+    var maxTimes = 150 , restTimes = 150 ;
+
+    var interval ;
 
     let percent;
+
 
     new Vue({
 
@@ -55,7 +59,13 @@
 
         methods: {
 
-            // Create cards array based on icons, shuffle them
+            alert(){
+
+                alert("on vue launching....");
+
+            },
+
+            /** Create cards array based on icons, shuffle them **/
             cardsShuffle() {
 
                 // prep objects
@@ -79,15 +89,15 @@
 		        progress = 0 ;
 
 		        // on lance les timers
-
-                setInterval(this.setTime(), 1000);
-                setInterval(this.countdown(), 1000);
+                this.countdown();
             },
 
-            // record game ...
+            /** record game ... **/
             gameRecord() {
 
-                nom = prompt("Votre nom ?");
+                var nom = prompt("Votre nom ?");
+
+                var totalSeconds =  parseInt(maxTimes) - parseInt(restTimes) ;
 
                 document.getElementById("input-nom").value = nom ;
                 document.getElementById("input-timer").value = totalSeconds ;
@@ -95,9 +105,10 @@
 
                 document.getElementById("form-game").submit();
 
+                return;
             },
 
-            // click sur une carte
+            /** click sur une carte **/
             handleClick(cardClicked)
             {
                 if (!this.runing) {
@@ -110,8 +121,6 @@
                     // when two cards are up, check if they match or turn them down
                     if (this.cardCount.cardsUp === 2) {
                         this.runing = true;
-		  
-		                setInterval(this.setTime, 1000);
 
 		                // on incremente le nombre d'essais
 		                tryCount++;
@@ -130,33 +139,8 @@
                     }
                 }
             },
-	
-            // gestion du chronometre...
-            setTime ()
-            {
-                ++totalSeconds;
 
-                document.getElementById("seconds").innerHTML = this.pad(totalSeconds%60);
-                document.getElementById("minutes").innerHTML = this.pad(parseInt(totalSeconds/60));
-
-
-            },
-
-            // formate les timers
-            pad(val)
-            {
-                var valString = val + "";
-                if(valString.length < 2)
-                {
-                    return "0" + valString;
-                }
-                else
-                {
-                    return valString;
-                }
-            },
-
-            //progress bar
+            /** progress bar */
             frame() {
 
                 if(progress < percent)
@@ -167,34 +151,50 @@
                 }
             },
 
-            // compte à rebours
+            /** gestion du chronometre et compte à rebours **/
             countdown() {
 
-                document.getElementById('countdown').innerHTML = this.pad(minutes) + ':' + this.pad(seconds) ;
+                interval = setInterval( function() {
 
-                if(seconds === 0)
-                {
-                    if(minutes === 0)
-                    {
-                        alert("countdown's over!");
+                    restTimes--;
 
-                        //clearInterval(interval);
+                    document.getElementById("countdown").innerHTML = pad(parseInt(restTimes / 60)) + ":" + pad(restTimes % 60) ; //+ "<br/>=>" + restTimes;
 
-                        document.getElementById("input-status").value = "failure" ;
+                    if (restTimes === 0) {
+
+                        clearInterval(interval);
+
+                        var nom = prompt("Fin du temps imparti ! Votre nom ?");
+
+                        var totalSeconds =  parseInt(maxTimes) - parseInt(restTimes) ;
+
+                        document.getElementById("input-nom").value = nom ;
+                        document.getElementById("input-timer").value = totalSeconds ;
+                        document.getElementById("input-try").value = tryCount ;
+                        document.getElementById("input-status").value = "failure";
+                        document.getElementById("form-game").submit();
 
                         this.gameRecord();
 
                         return;
                     }
-                    else
-                    {
-                        minutes--;
-                        seconds = 60;
-                    }
-                }
 
-                seconds--;
-            }
+                    /** formate les timers **/
+                    function pad(val)
+                    {
+                        var valString = val + "";
+                        if(valString.length < 2)
+                        {
+                            return "0" + valString;
+                        }
+                        else
+                        {
+                            return valString;
+                        }
+                    }
+
+                }, 1000);
+            },
         },
 
         mounted() {
@@ -203,7 +203,7 @@
 
         computed: {
 
-            // make a count of cards up and cards matched, keep icons of cards to check in array
+            /** make a count of cards up and cards matched, keep icons of cards to check in array */
             cardCount () {
 
                 let cardUpCount = 0;
@@ -224,9 +224,7 @@
 	  				  
 		        document.getElementById("tryCount").innerHTML = tryCount+" essais";
 
-		        setInterval(this.frame, 100);
-
-		        this.countdown();
+		        setInterval(this.frame, 10);
 
 		        return {
                     cardsUp: cardUpCount,
@@ -235,13 +233,21 @@
 		        };
             },
 
-            // update victory state
+            /** update victory state **/
             victory () {
-                if (this.cardCount.cardsMatched === this.cards.length) {
+
+                console.log("vict restTimes"+restTimes);
+
+                if (restTimes > 0 && this.cardCount.cardsMatched === this.cards.length) {
 
                     document.getElementById("input-status").value = "victory" ;
 
                     return true;
+                }
+                else {
+
+                    return false ;
+
                 }
             }
         }
