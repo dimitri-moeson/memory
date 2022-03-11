@@ -91,22 +91,7 @@ class Entity
     }
 
     /**
-     * @return mixed
-     */
-    public function getDateUpdate()
-    {
-        return $this->date_update;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDateDelete()
-    {
-        return $this->date_delete;
-    }
-
-    /**
+     * enregistre les données de l'objet en base
      * @return array
      */
     public function save()
@@ -143,6 +128,7 @@ class Entity
     }
 
     /**
+     * rend obsolete l'enregistrement en base
      * @return array
      */
     public function delete()
@@ -158,6 +144,8 @@ class Entity
     }
 
     /**
+     * execute les requete de MAJ.
+     *
      * @param $statement
      * @param $values
      * @return array

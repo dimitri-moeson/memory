@@ -30,7 +30,7 @@ class Executer
      */
     public function query( $statement, $class_name = null , $one = false  )
     {
-        $req = $this->pdo->query($statement);
+        $req = $this->getPDO()->query($statement);
 
         $this->fetchMode($req, $class_name);
 
@@ -48,7 +48,7 @@ class Executer
      */
     public function prepare($statement, $class_name = null ,  $one = false, $attrib = [] , $isModif = false  )
     {
-        $req = $this->pdo->prepare($statement);
+        $req = $this->getPDO()->prepare($statement);
 
         $this->bind($req , $attrib ,$isModif ) ;
 
@@ -120,5 +120,13 @@ class Executer
             return $req->fetch();
         else
             return $req->fetchAll();
+    }
+
+    /**
+     * @return PDO
+     */
+    private function getPDO(): PDO
+    {
+        return $this->pdo;
     }
 }

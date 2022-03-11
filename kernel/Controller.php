@@ -8,6 +8,7 @@ namespace kernel {
     class Controller
     {
         /**
+         * execute le rendu HTML pour la requete de l'utilisateur
          * @param $view
          * @param array $variables
          */
@@ -53,6 +54,7 @@ namespace kernel {
         }
 
         /**
+         * execute la commande de l'utilisateur
          * @param $p
          */
         public static function execute($p){

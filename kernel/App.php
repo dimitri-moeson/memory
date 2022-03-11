@@ -46,7 +46,6 @@ namespace kernel {
                 self::$_instance = new App();
             }
             return self::$_instance;
-
         }
 
         /**

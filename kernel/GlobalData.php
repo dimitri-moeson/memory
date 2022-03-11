@@ -2,13 +2,19 @@
 namespace kernel;
 
 /**
- * Class GlobalData recupere les infos de formulaire our d'URL
+ * Class GlobalData recupere les infos de formulaire ($_POST) ou d'URL ($_GET)
  * @package kernel
  */
 class GlobalData
 {
+    /**
+     * @var GlobalData $_instance
+     */
     private static $_instance ;
 
+    /**
+     * @var string $method POST/GET
+     */
     private $method;
 
     /**
@@ -20,7 +26,6 @@ class GlobalData
             self::$_instance = new GlobalData();
         }
         return self::$_instance;
-
     }
 
     /**

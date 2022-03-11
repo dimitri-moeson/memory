@@ -68,18 +68,17 @@ class DefaultController extends Controller
     /**
      *
      */
-    function index(){
-
+    function index()
+    {
         $this->ladder();
         $this->render(  "ladder");
-
     }
 
     /**
      *
      */
-    function game(){
-
+    function game()
+    {
         $this->render(  "game");
     }
 }

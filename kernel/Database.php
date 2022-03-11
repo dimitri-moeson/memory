@@ -18,6 +18,16 @@ class Database
 
     private $pdo ;
 
+    /**
+     * Database constructor.
+     *
+     * @param $db_name
+     * @param $db_user
+     * @param $db_pass
+     * @param string $db_host
+     * @param string $db_serv
+     * @param string $db_char
+     */
     public function __construct($db_name,$db_user,$db_pass,$db_host = "localhost",$db_serv = "mysql",$db_char = "utf8")
     {
         $this->db_name = $db_name;
@@ -68,6 +78,10 @@ class Database
 
     }
 
+    /**
+     * amorce l'execution d'une requete
+     * @return Executer
+     */
     public function query_init() : Executer
     {
         return new Executer($this->getPDO());

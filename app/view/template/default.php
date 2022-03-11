@@ -22,19 +22,19 @@
 
 </head>
 
-<body translate="no" >
+    <body translate="no" >
 
-    <header>
-        <h1>Memoriel</h1>
-    </header>
-    <ul>
-        <li <?php echo $view ==="game" ? "class='active'" : "" ?> ><a href="?p=default.game" onclick="return confirm('nouvelle partie ?')" >Jeu</a></li>
-        <li <?php echo $view ==="ladder" ? "class='active'" : "" ?> ><a href="?p=default.ladder">Classement</a></li>
+        <header>
+            <h1>Memoriel</h1>
+        </header>
 
-    </ul>
+        <ul>
+            <li <?php echo $view ==="game" ? "class='active'" : "" ?> ><a href="?p=default.game" onclick="return confirm('nouvelle partie ?')" >Jeu</a></li>
+            <li <?php echo $view ==="ladder" ? "class='active'" : "" ?> ><a href="?p=default.ladder">Classement</a></li>
+        </ul>
 
-    <?php echo $content ?>
+        <?php echo $content ?>
 
-</body>
+    </body>
 
 </html>
