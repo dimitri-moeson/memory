@@ -1,5 +1,4 @@
-<?php
-namespace kernel {
+<?php namespace kernel {
 
     /**
      * Class Fluent Builder - construit les requetes SQL à partir de la class modele en parametre

@@ -1,5 +1,4 @@
-<?php
-namespace kernel {
+<?php namespace kernel {
 
     /**
      * Class Controller execute les requetes utilisateurs et affiche les résultat

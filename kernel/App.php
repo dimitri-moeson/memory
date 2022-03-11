@@ -1,5 +1,4 @@
-<?php
-namespace kernel {
+<?php namespace kernel {
 
     /**
      * Class App

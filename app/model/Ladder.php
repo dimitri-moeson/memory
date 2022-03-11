@@ -1,96 +1,104 @@
-<?php
-namespace app\model;
+<?php namespace app\model {
 
-use kernel\Entity;
-
-/**
- * Class Ladder modele des données des joueurs et de leur parties en base
- * @package app\model
- */
-class Ladder extends Entity
-{
-    /**
-     * @var \DateTime $timer
-     */
-    public $timer ;
-    /**
-     * @var integer $try
-     */
-    public $try ;
-    /**
-     * @var string $nom
-     */
-    public $nom ;
-    /**
-     * @var string $status
-     */
-    public $status ;
+    use kernel\Entity;
 
     /**
-     * @return \DateTime
+     * Class Ladder modele des données des joueurs et de leur parties en base
+     * @package app\model
      */
-    public function getTimer() : \DateTime
+    class Ladder extends Entity
     {
-        $date = new \DateTime();
+        /**
+         * @var \DateTime $timer
+         */
+        public $timer ;
+        /**
+         * @var integer $try
+         */
+        public $try ;
+        /**
+         * @var string $nom
+         */
+        public $nom ;
+        /**
+         * @var string $status
+         */
+        public $status ;
 
-        $date->setTimestamp($this->timer);
+        /**
+         * @return \DateTime
+         */
+        public function getTimer() : \DateTime
+        {
+            $date = new \DateTime();
 
-        return $date;
-    }
+            $date->setTimestamp($this->timer);
 
-    /**
-     * @return integer
-     */
-    public function getTry(): int
-    {
-        return $this->try;
-    }
+            return $date;
+        }
 
-    /**
-     * @return string
-     */
-    public function getNom() :string
-    {
-        return $this->nom;
-    }
+        /**
+         * @return integer
+         */
+        public function getTry(): int
+        {
+            return $this->try;
+        }
 
-    /**
-     * @return string
-     */
-    public function getStatus() :string
-    {
-        return $this->status;
-    }
+        /**
+         * @return string
+         */
+        public function getNom() :string
+        {
+            return $this->nom;
+        }
 
-    /**
-     * @param mixed $timer
-     */
-    public function setTimer($timer)
-    {
-        $this->timer = $timer;
-    }
+        /**
+         * @return string
+         */
+        public function getStatus() :string
+        {
+            return $this->status;
+        }
 
-    /**
-     * @param mixed $try
-     */
-    public function setTry($try)
-    {
-        $this->try = $try;
-    }
+        /**
+         * @param mixed $timer
+         */
+        public function setTimer($timer) :Ladder
+        {
+            $this->timer = $timer;
 
-    /**
-     * @param mixed $nom
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-    }
+            return $this;
+        }
 
-    /**
-     * @param mixed $status
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
+        /**
+         * @param mixed $try
+         */
+        public function setTry($try) :Ladder
+        {
+            $this->try = $try;
+
+            return $this;
+        }
+
+        /**
+         * @param mixed $nom
+         */
+        public function setNom($nom) :Ladder
+        {
+            $this->nom = $nom;
+
+            return $this;
+        }
+
+        /**
+         * @param mixed $status
+         */
+        public function setStatus($status) :Ladder
+        {
+            $this->status = $status;
+
+            return $this;
+        }
     }
 }

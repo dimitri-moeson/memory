@@ -1,5 +1,4 @@
-<?php
-namespace kernel {
+<?php namespace kernel {
     /**
      * Class Autoloader
      * chargement dynamique des class lors de l'appel
