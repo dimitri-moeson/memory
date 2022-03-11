@@ -19,7 +19,8 @@
          * Builder constructor.
          * @param $classname
          */
-        public function __construct($classname ){
+        public function __construct($classname )
+        {
 
             self::$classname = $classname;
 
@@ -27,14 +28,13 @@
 
             $this->sources[] = " `$table` ";
             $this->conditions[] = " $table.date_delete is null ";
-
-            return $this ;
         }
 
         /**
          * @return $this
          */
-        public function select(){
+        public function select() :Builder
+        {
 
             foreach ( func_get_args() as $arg )$this->fields[] = $arg ;
 
@@ -48,7 +48,8 @@
          * @param null $alias
          * @return $this
          */
-        public function count($fields, $distinct = false ,$alias = null){
+        public function count($fields, $distinct = false ,$alias = null):Builder
+        {
 
             if(is_null($alias)){
 
@@ -64,7 +65,8 @@
         /**
          * @return $this
          */
-        public function group(){
+        public function group():Builder
+        {
 
             foreach ( func_get_args() as $arg )$this->groups[] = $arg ;
 
@@ -75,7 +77,8 @@
         /**
          * @return $this
          */
-        public function where(){
+        public function where():Builder
+        {
 
             foreach ( func_get_args() as $arg )$this->conditions[] = $arg ;
 
@@ -88,7 +91,8 @@
          * @param string $sens
          * @return $this
          */
-        public function order($order,$sens = "ASC"){
+        public function order($order,$sens = "ASC"):Builder
+        {
 
             $this->ordres[] = " $order $sens ";
 
@@ -100,7 +104,7 @@
          * @param $limit
          * @return $this
          */
-        public function limit($limit)
+        public function limit($limit):Builder
         {
             $this->limit = $limit ;
 
@@ -110,7 +114,8 @@
         /**
          * @return string
          */
-        public function __toString(){
+        public function __toString() :string
+        {
 
             $statement = "SELECT DISTINCT " . implode(', ', $this->fields)
                 . " FROM " . implode(', ', $this->sources);
@@ -144,20 +149,26 @@
          * @param bool $one
          * @param null $attrib
          * @param bool $modif
-         * @return array
+         * @return array|Entity
+         * @throws \Exception
          */
         public function execute(  $one = false, $attrib = null, $modif = false )
         {
-            $exec = App::getInstance()->getDB()->query_init();
+            try {
+                $exec = App::getInstance()->getDB()->query_init();
 
-            if($attrib == null )
-            {
-                return $exec->query( $this, self::$classname , $one );
+                if($attrib == null )
+                {
+                    return $exec->query( $this, self::$classname , $one );
+                }
+                elseif(is_array($attrib))
+                {
+                    return $exec->prepare($this, self::$classname , $one  , $attrib , $modif );
+                }
+            } catch (\Exception $e) {
+
             }
-            elseif(is_array($attrib))
-            {
-                return $exec->prepare($this, self::$classname , $one  , $attrib , $modif );
-            }
+
         }
 
         /**
@@ -165,20 +176,28 @@
          * select * from {table} where id = ? and date_delete is null ;
          * @param $id
          * @return Entity
+         * @throws \Exception
          */
-        public function find($id)
+        public function find($id):Entity
         {
-            return $this->select("*")->where("id = ?")->execute(true , [$id] );
+            try {
+                return $this->select("*")->where("id = ?")->execute(true, [$id]);
+            } catch (\Exception $e) {
+            }
         }
 
         /**
          * retourne la collection complete d'instance non supprimée en base
          * select * from {table} where date_delete is null ;
          * @return array
+         * @throws \Exception
          */
-        public function all()
+        public function all() :Array
         {
-            return $this->select("*")->execute();
+            try {
+                return $this->select("*")->execute();
+            } catch (\Exception $e) {
+            }
         }
     }
 }

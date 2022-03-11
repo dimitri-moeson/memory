@@ -1,5 +1,7 @@
 <?php namespace kernel {
 
+    use Exception;
+
     /**
      * Class App
      * @package kernel
@@ -25,6 +27,7 @@
          * chargement des composant principaux & initialisation des variables
          * - Autoloader
          * - Base de données
+         * @throws Exception
          */
         public function load()
         {
@@ -32,14 +35,17 @@
 
             \kernel\Autoloader::register();
 
-            $this->getDB();
+            try {
+                $this->getDB();
+            } catch (Exception $e) {
+            }
         }
 
         /**
          * Instance unique de App
          * @return App
          */
-        public static function getInstance()
+        public static function getInstance():App
         {
             if(is_null(self::$_instance)){
                 self::$_instance = new App();
@@ -59,9 +65,9 @@
         /**
          * Instance unique de Database
          * @return \kernel\Database
-         * @throws \Exception
+         * @throws Exception
          */
-        public function getDB()
+        public function getDB():Database
         {
             if(is_null($this->db))
             {
@@ -83,15 +89,15 @@
          * @param $key
          * @param $dom
          * @return mixed
-         * @throws \Exception
+         * @throws Exception
          */
-        public function param( $key,$dom = "database"){
-
+        public function param( $key, $dom = "database" ):string
+        {
             $hasBase = array_key_exists($dom, $this->settings);
             $hasKeys = array_key_exists($key, $this->settings[$dom]);
 
             if (!$hasBase || !$hasKeys ) {
-                throw new \Exception("Missing config [$dom/$key] informations");
+                throw new Exception("Missing config [$dom/$key] informations");
             }
 
             return $this->settings[$dom][$key];

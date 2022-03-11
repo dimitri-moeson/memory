@@ -46,7 +46,7 @@
          * @param bool $one
          * @param array $attrib
          * @param bool $isModif
-         * @return array
+         * @return array|bool|Entity
          */
         public function prepare($statement, $class_name = null ,  $one = false, $attrib = [] , $isModif = false  )
         {
@@ -114,7 +114,7 @@
          * on recupere le(s) resultat(s) de la requete executé
          * @param PDOStatement $req
          * @param bool $one
-         * @return array|mixed
+         * @return array|Entity
          */
         private function result( PDOStatement $req,  $one = false )
         {

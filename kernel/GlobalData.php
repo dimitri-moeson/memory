@@ -19,7 +19,7 @@
         /**
          * @return GlobalData
          */
-        public static function getInstance()
+        public static function getInstance() :GlobalData
         {
             if(is_null(self::$_instance)){
                 self::$_instance = new GlobalData();

@@ -1,5 +1,7 @@
 <?php namespace kernel {
 
+    use Exception;
+
     /**
      * Class Entity pour gerer en objet les données de la database
      * @package kernel
@@ -92,6 +94,7 @@
         /**
          * enregistre les données de l'objet en base
          * @return array
+         * @throws \Exception
          */
         public function save()
         {
@@ -123,12 +126,19 @@
                 $values['id'] = $this->getId() ;
             }
 
-            return $this->alter($statement,$values);
+            try {
+
+                return $this->alter($statement, $values);
+
+            } catch (Exception $e) {
+
+            }
         }
 
         /**
          * rend obsolete l'enregistrement en base
          * @return array
+         * @throws Exception
          */
         public function delete()
         {
@@ -139,7 +149,10 @@
             $values['id'] = $this->getId() ;
             $values['date_delete'] = date("Y-m-d H:i:s") ;
 
-            return $this->alter($statement,$values);
+            try {
+                return $this->alter($statement, $values);
+            } catch (Exception $e) {
+            }
         }
 
         /**
@@ -148,13 +161,13 @@
          * @param $statement
          * @param $values
          * @return array
-         * @throws \Exception
+         * @throws Exception
          */
         private function alter($statement,$values)
         {
             $exec = App::getInstance()->getDB()->query_init();
 
-            return $exec->prepare($statement,"".get_called_class(),true, $values , true );
+            return $exec->prepare($statement,get_called_class(),true, $values , true );
         }
     }
 }
