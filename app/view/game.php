@@ -1,4 +1,12 @@
-<h2>Jeu</h2>
+<form id="form-game" method="post" action="?p=save" >
+
+    <input type="hidden" id="input-timer" name="timer"/>
+    <input type="hidden" id="input-try" name="try"/>
+    <input type="hidden" id="input-nom" name="nom"/>
+    <input type="hidden" id="input-status" name="status"/>
+    <input type="hidden" id="record" name="record" value="1"/>
+
+</form>
 
 <div id="app">
 
@@ -13,15 +21,7 @@
 
 </div>
 
-<form id="form-game" method="post" action="?p=save" >
 
-    <input type="hidden" id="input-timer" name="timer"/>
-    <input type="hidden" id="input-try" name="try"/>
-    <input type="hidden" id="input-nom" name="nom"/>
-    <input type="hidden" id="input-status" name="status"/>
-    <input type="hidden" id="record" name="record" value="1"/>
-
-</form>
 
 ​<div id="myProgress">
     <div id="myBar"></div>

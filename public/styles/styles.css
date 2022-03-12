@@ -38,6 +38,7 @@ ul {
 
     list-style-type: none;
     margin: 0;
+    margin-bottom: 5px;
     padding: 0;
     padding-left: 50px;
     overflow: hidden;
@@ -66,7 +67,7 @@ li.active a { color:black; }
 #app {
   display: grid;
   grid-template-columns: repeat(auto-fit, 60px);
-  grid-auto-rows: 60px;
+  grid-auto-rows: 52px;
   grid-gap: 15px;
   justify-content: center;
   perspective: 800px;
