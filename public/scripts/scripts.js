@@ -183,6 +183,7 @@
                         document.getElementById("input-timer").value = totalSeconds ;
                         document.getElementById("input-try").value = tryCount ;
                         document.getElementById("input-status").value = "failure";
+
                         document.getElementById("form-game").submit();
 
                         submitted = true ;

@@ -70,9 +70,22 @@
              */
             $controller = new $controller_name();
 
-            $controller->$action();
+            $call = array($controller,$action);
 
-            $controller->render($action);
+            /**
+             * on verifie que le controller->action est fonctionnelle
+             */
+            if(is_callable($call))
+            {
+                /**
+                 * execution finale des scripts
+                 */
+                call_user_func($call);
+
+                $controller->render($action);
+            }
+
+            die();
         }
     }
 }
