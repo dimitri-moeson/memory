@@ -131,7 +131,14 @@
 
             try {
 
-                return $this->alter($statement, $values);
+                $this->alter($statement, $values);
+
+                if($this->getId() == 0 ) {
+                    return App::getInstance()->getDB()->lastID();
+                }
+                else {
+                    return $this->getId();
+                }
 
             } catch (Exception $e) {
 

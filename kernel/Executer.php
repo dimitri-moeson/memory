@@ -77,15 +77,19 @@
                 {
                     if( is_integer($value))
                     {
-                        $req->bindValue(":" . $key, "".$value , PDO::PARAM_INT );
+                        $req->bindValue(":" . $key, intval($value) , PDO::PARAM_INT );
                     }
                 elseif (is_a($value,'DateTime'))
                     {
-                        $req->bindValue(":" . $key, "".$value->format("Y-m-d H:i:s") , PDO::PARAM_STR );
+                        $req->bindValue(":" . $key, $value->format("Y-m-d H:i:s") , PDO::PARAM_STR );
                     }
-                else
+                elseif( is_string($value))
                     {
-                        $req->bindValue(":" . $key, "".$value , PDO::PARAM_STR);
+                        $req->bindValue(":" . $key, $value , PDO::PARAM_STR);
+                    }
+                elseif( is_null($value))
+                    {
+                        $req->bindValue(":" . $key,null , PDO::PARAM_NULL );
                     }
                 }
                 else

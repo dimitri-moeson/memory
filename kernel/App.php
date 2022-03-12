@@ -27,6 +27,7 @@
          * chargement des composant principaux & initialisation des variables
          * - Autoloader
          * - Base de données
+         * - etc...
          * @throws Exception
          */
         public function load()
@@ -36,8 +37,15 @@
             \kernel\Autoloader::register();
 
             try {
+                /**
+                 * appel de la configuration de la BDD
+                 */
                 $this->getDB();
+
             } catch (Exception $e) {
+
+                var_dump($e);
+
             }
         }
 

@@ -13,7 +13,7 @@
 
 </div>
 
-<form id="form-game" method="post" action="?p=default.save" >
+<form id="form-game" method="post" action="?p=save" >
 
     <input type="hidden" id="input-timer" name="timer"/>
     <input type="hidden" id="input-try" name="try"/>

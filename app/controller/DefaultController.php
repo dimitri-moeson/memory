@@ -39,12 +39,13 @@
                 $ladd->save();
 
                 /** on recharge la page */
-                $this->redirect("default.ladder");
+                $this->redirect("ladder");
             }
         }
 
         /**
          * classement des joueurs
+         * @throws \Exception
          */
         function ladder(){
 
@@ -53,12 +54,18 @@
              */
             $ladd = Ladder::init();
 
-            $this->ladders = $ladd::select('*')
-                ->where("status = :status")
-                ->where("nom is not null")
-                ->order("timer","ASC")
-                ->order("try",'DESC')
-                ->execute( false , array("status" => "victory" ));
+            try {
+                $this->ladders = $ladd::select('*')
+                    ->where("status = :status")
+                    ->where("nom is not null", "nom <> '' ")
+                    ->order("timer", "ASC")
+                    ->order("try", 'DESC')
+                    ->execute(false, array("status" => "victory"));
+
+            } catch (\Exception $e) {
+
+                die( $e->getMessage() );
+            }
 
             $this->count = count($this->ladders);
         }

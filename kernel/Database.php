@@ -19,7 +19,7 @@
 
         /**
          * Database constructor.
-         *
+         * instanciation Unique dans App
          * @param $db_name
          * @param $db_user
          * @param $db_pass
@@ -84,6 +84,15 @@
         public function query_init() : Executer
         {
             return new Executer($this->getPDO());
+        }
+
+        /**
+         * retourne le dernier Identifint enregistré en base
+         * @return string
+         */
+        public function lastID()
+        {
+            return $this->getPDO()->lastInsertId();
         }
     }
 }

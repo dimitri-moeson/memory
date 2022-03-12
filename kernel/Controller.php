@@ -54,6 +54,27 @@
         }
 
         /**
+         * gestion des erreurs 404
+         * @param $view
+         */
+        protected function notfound($view){
+
+            header("HTTP/1.1 404 Not Found");
+
+            $content = "<h2>la page demandée n'existe pas</h2>";
+
+            /**
+             * $content est affiché dans le template HTML
+             */
+            require ROOT."/app/view/template/default.php";
+
+            /**
+             * on bloque tout une fois le résultat final obtenu
+             */
+            die();
+        }
+
+        /**
          * execute la commande de l'utilisateur
          * appel du controller et de l'action
          * puis generation et affichage du rendu HTML
@@ -61,7 +82,17 @@
          */
         public static function execute($p){
 
-            list($cnt_name,$action) = explode(".",$p);
+            $request = explode(".",$p);
+
+            if(count($request) === 2 )
+            {
+                list($cnt_name, $action) = $request;
+            }
+            elseif(count($request) === 1 )
+            {
+                $cnt_name = 'default';
+                $action = $request[0];
+            }
 
             $controller_name = "\\app\\controller\\".ucfirst($cnt_name)."Controller";
 
@@ -83,6 +114,10 @@
                 call_user_func($call);
 
                 $controller->render($action);
+            }
+            else
+            {
+                $controller->notfound($action);
             }
 
             die();

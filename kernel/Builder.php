@@ -153,7 +153,8 @@
         }
 
         /**
-         * execute la requete construite en appelant la classe DataBase
+         * execute la requete construite
+         * appel la classe DataBase
          * @param bool $one
          * @param null $attrib
          * @param bool $modif
