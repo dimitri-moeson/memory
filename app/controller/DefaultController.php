@@ -47,27 +47,41 @@
          * classement des joueurs
          * @throws \Exception
          */
-        function ladder(){
-
+        function ladder()
+        {
             /**
              * @var Builder $ladd
              */
             $ladd = Ladder::init();
 
+            /**
+             * @var Builder $req
+             */
+            $req = Builder::init();
+
             try {
+
+                /** @var Builder associé à une Entity */
+
                 $this->ladders = $ladd::select('*')
-                    ->where("status = :status")
-                    ->where("nom is not null", "nom <> '' ")
+                    ->where("nom is not null", "nom <> '' ","status = :status")
                     ->order("timer", "ASC")
                     ->order("try", 'DESC')
                     ->execute(false, array("status" => "victory"));
+
+                /** @var Builder non-associé à une Entity => retourne un stdClass */
+
+                $this->count = $req->count('id',true,'cnt')
+                    ->from("ladder")
+                    ->where("nom is not null", "nom <> '' ","status = :status")
+                    ->order("timer", "ASC")
+                    ->order("try", 'DESC')
+                    ->execute(true , array("status" => "victory"));
 
             } catch (\Exception $e) {
 
                 die( $e->getMessage() );
             }
-
-            $this->count = count($this->ladders);
         }
 
         /**

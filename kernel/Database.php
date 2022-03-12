@@ -87,7 +87,7 @@
         }
 
         /**
-         * retourne le dernier Identifint enregistré en base
+         * retourne le dernier Identifiant enregistré en base
          * @return string
          */
         public function lastID()

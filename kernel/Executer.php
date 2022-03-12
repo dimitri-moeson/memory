@@ -103,15 +103,26 @@
         /**
          * on recupere les resultats sous la class saisie en parametres
          * si pas de class en parametre, on recupere le resultat dans la class parent Entity
+         * si $class_name est un booleen, on recupere un stdClass
          * @param PDOStatement $req
-         * @param null $class_name
+         * @param Bool|String $class_name
          */
         private function fetchMode(PDOStatement &$req , $class_name = null )
         {
-            if(is_null($class_name))
-                $req->setFetchMode( PDO::FETCH_CLASS, Entity::class);
-            else
-                $req->setFetchMode( PDO::FETCH_CLASS, $class_name);
+            if($class_name === false )
+            {
+                $req->setFetchMode(PDO::FETCH_OBJ);
+            }
+            elseif(!is_null($class_name) && class_exists($class_name))
+            {
+                $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
+            }
+            elseif(is_null($class_name))
+            {
+                $req->setFetchMode(PDO::FETCH_CLASS, Entity::class);
+            }
+
+
         }
 
         /**

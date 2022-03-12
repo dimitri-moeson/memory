@@ -22,13 +22,37 @@
          */
         public function __construct($classname )
         {
+            self::$classname = class_exists($classname) ? $classname : false ;
 
-            self::$classname = $classname;
+            if($classname !== false)
+            {
+                $table = strtolower(str_replace("app\\model\\", "", self::$classname));
 
-            $table =  strtolower(str_replace("app\\model\\","", self::$classname ));
+                $this->from($table);
+            }
+        }
 
+        /**
+         * instancie un Builder sans Entity
+         * @return Builder
+         */
+        public static function init() : Builder
+        {
+            return new Builder(false);
+        }
+
+
+        /**
+         * ajoute une table source à la requete
+         * @param $table
+         * @return Builder
+         */
+        public function from($table) :Builder
+        {
             $this->sources[] = " `$table` ";
             $this->conditions[] = " $table.date_delete is null ";
+            
+            return $this ;
         }
 
         /**
@@ -40,7 +64,6 @@
             foreach ( func_get_args() as $arg )$this->fields[] = $arg ;
 
             return $this ;
-
         }
 
         /**
@@ -52,7 +75,6 @@
          */
         public function count($fields, $distinct = false ,$alias = null):Builder
         {
-
             if(is_null($alias)){
 
                 $this->fields[] = " count( ".($distinct ? "DISTINCT" : "" )." `$fields`) ";
@@ -60,8 +82,8 @@
             }else {
                 $this->fields[] = " count( ".($distinct ? "DISTINCT" : "" )." `$fields`) AS $alias ";
             }
-            return $this ;
 
+            return $this ;
         }
 
         /**
@@ -70,11 +92,9 @@
          */
         public function group():Builder
         {
-
             foreach ( func_get_args() as $arg )$this->groups[] = $arg ;
 
             return $this ;
-
         }
 
         /**
@@ -83,11 +103,9 @@
          */
         public function where():Builder
         {
-
             foreach ( func_get_args() as $arg )$this->conditions[] = $arg ;
 
             return $this ;
-
         }
 
         /**
@@ -98,11 +116,9 @@
          */
         public function order($order,$sens = "ASC"):Builder
         {
-
             $this->ordres[] = " $order $sens ";
 
             return $this ;
-
         }
 
         /**
@@ -123,7 +139,6 @@
          */
         public function __toString() :string
         {
-
             $statement = "SELECT DISTINCT " . implode(', ', $this->fields)
                 . " FROM " . implode(', ', $this->sources);
 

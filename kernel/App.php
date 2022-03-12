@@ -95,6 +95,7 @@
         }
 
         /**
+         * retourne les elments de settings
          * @param $key
          * @param $dom
          * @return mixed

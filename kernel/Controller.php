@@ -11,8 +11,8 @@
          * @param $view
          * @param array $variables
          */
-        protected function render($view){
-
+        protected function render($view)
+        {
             /**
              * on execute et on stocke la requete dans la variable $content
              */
@@ -44,8 +44,8 @@
          * redirection PHP
          * @param $location
          */
-        protected function redirect($location){
-
+        protected function redirect($location)
+        {
             header("Status: 301 Moved Permanently", false, 301);
             header("location:?p=".$location);
             $this->render("404");
@@ -68,8 +68,8 @@
          * puis generation et affichage du rendu HTML
          * @param $p
          */
-        public static function execute($p){
-
+        public static function execute($p)
+        {
             $request = explode(".",$p);
 
             if(count($request) === 2 )
@@ -82,7 +82,7 @@
                 $action = $request[0];
             }
 
-            $controller_name = "\\app\\controller\\".ucfirst($cnt_name)."Controller";
+            $controller_name = "app\controller\\".ucfirst($cnt_name)."Controller";
 
             /**
              * @var Controller $controller

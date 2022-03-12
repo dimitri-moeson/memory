@@ -96,7 +96,7 @@
 
         /**
          * enregistre les données de l'objet en base
-         * @return array
+         * @return integer ID de l'enregistrement
          * @throws \Exception
          */
         public function save()
@@ -133,10 +133,17 @@
 
                 $this->alter($statement, $values);
 
-                if($this->getId() == 0 ) {
+                if($this->getId() == 0 )
+                {
+                    /**
+                     *  retourne le dernier enregistrement en base
+                     */
                     return App::getInstance()->getDB()->lastID();
                 }
                 else {
+                    /**
+                     * retourne l'ID de l'Entity
+                     */
                     return $this->getId();
                 }
 

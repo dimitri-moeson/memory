@@ -32,7 +32,13 @@
     <tfoot>
         <tr>
             <td></td>
-            <th><h3><?php echo $count." resultats" ?></h3></th>
+            <th><h3><?php
+
+                    /** @var stdClass $count */
+
+                    echo $count->cnt." resultats" ;
+
+                    ?></h3></th>
         </tr>
     </tfoot>
 </table>
