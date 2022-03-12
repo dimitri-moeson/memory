@@ -29,10 +29,10 @@
 
                     /** on affecte les données du formulaire à l'objet Ladder */
 
-                    ->setTimer(GlobalData::getInstance()->get('timer'))
-                    ->setTry(GlobalData::getInstance()->get('try'))
-                    ->setNom(GlobalData::getInstance()->get('nom'))
-                    ->setStatus(GlobalData::getInstance()->get('status'))
+                    ->setTimer(GlobalData::getInstance()->get('timer',null))
+                    ->setTry(GlobalData::getInstance()->get('try' ,null ))
+                    ->setNom(GlobalData::getInstance()->get('nom', null))
+                    ->setStatus(GlobalData::getInstance()->get('status' ,null))
                 ;
 
                 /** on enregistre le resultat de la partie joué */
@@ -54,11 +54,11 @@
             $ladd = Ladder::init();
 
             $this->ladders = $ladd::select('*')
-                ->where("status = :_status")
+                ->where("status = :status")
                 ->where("nom is not null")
                 ->order("timer","ASC")
                 ->order("try",'DESC')
-                ->execute( false , array("_status" => "victory")); //
+                ->execute( false , array("status" => "victory" ));
 
             $this->count = count($this->ladders);
         }

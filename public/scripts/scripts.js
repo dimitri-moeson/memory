@@ -173,17 +173,19 @@
                         }
                     }
 
-                    if (restTimes === 0) {
+                    if (submitted === false && restTimes === 0) {
 
                         clearInterval(interval);
 
-                        let nom = prompt("Fin du temps imparti !"+"\n"+" Votre nom ?");
+                        let nom = prompt("\t\t\t"+"Fin du temps imparti !"+"\n"+" Votre nom ?");
 
                         document.getElementById("input-nom").value = nom ;
                         document.getElementById("input-timer").value = totalSeconds ;
                         document.getElementById("input-try").value = tryCount ;
                         document.getElementById("input-status").value = "failure";
                         document.getElementById("form-game").submit();
+
+                        submitted = true ;
                     }
 
                 }, 1000);
@@ -225,7 +227,7 @@
 
                 if (submitted === false && restTimes > 0 && this.cardCount.cardsMatched === this.cards.length) {
 
-                    let nom = prompt("Victoire !"+"\n"+"Votre nom ?");
+                    let nom = prompt("\t\t\t"+"Victoire !"+"\n"+"Votre nom ?");
                     let totalSeconds =  parseInt(maxTimes) - parseInt(restTimes) ;
 
                     /** record game ... **/

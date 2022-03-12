@@ -62,41 +62,45 @@
         }
 
         /**
-         * @param mixed $timer
+         * @param integer $timer
          */
-        public function setTimer($timer) :Ladder
+        public function setTimer($timer = null ) :Ladder
         {
-            $this->timer = $timer;
+            if(!is_null($timer))
+                $this->timer = $timer;
 
             return $this;
         }
 
         /**
-         * @param mixed $try
+         * @param integer $try
          */
-        public function setTry($try) :Ladder
+        public function setTry($try = null ) :Ladder
         {
-            $this->try = $try;
+            if(!is_null($try))
+                $this->try = $try;
 
             return $this;
         }
 
         /**
-         * @param mixed $nom
+         * @param string $nom
          */
-        public function setNom($nom) :Ladder
+        public function setNom($nom = null ) :Ladder
         {
-            $this->nom = $nom;
+            if(!is_null($nom))
+                $this->nom = $nom;
 
             return $this;
         }
 
         /**
-         * @param mixed $status
+         * @param string $status
          */
-        public function setStatus($status) :Ladder
+        public function setStatus($status = null ) :Ladder
         {
-            $this->status = $status;
+            if(!is_null($status))
+                $this->status = $status;
 
             return $this;
         }
