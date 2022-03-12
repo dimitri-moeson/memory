@@ -60,12 +60,7 @@
                 ->order("try",'DESC')
                 ->execute( false , array("_status" => "victory")); //
 
-            $this->count = $ladd::count("id",true  , 'counter')
-                ->where("status = :_status")
-                ->where("nom is not null")
-                ->order("timer","ASC")
-                ->order("try",'DESC')
-                ->execute( true , array("_status" => "victory"));
+            $this->count = count($this->ladders);
         }
 
         /**

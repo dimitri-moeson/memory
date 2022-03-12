@@ -1,19 +1,8 @@
 
-<h2>Ladder</h2>
-<h3><?php echo $count->counter." resultats" ?></h3>
 
+<h2>Classement</h2>
 <table>
 
-    <thead>
-        <tr>
-            <th>Rang</th>
-            <th>Nom</th>
-            <th>Timer</th>
-            <th>Essais</th>
-            <th>Statut</th>
-            <th>Date</th>
-        </tr>
-    </thead>
     <tbody>
     <?php
 
@@ -31,4 +20,21 @@
         </tr>
     <?php } ?>
     </tbody>
+
+    <thead>
+    <tr>
+        <th>Rang</th>
+        <th>Nom</th>
+        <th>Timer</th>
+        <th>Essais</th>
+        <th>Statut</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td></td>
+            <th><h3><?php echo $count." resultats" ?></h3></th>
+        </tr>
+    </tfoot>
 </table>

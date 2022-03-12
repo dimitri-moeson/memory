@@ -1,3 +1,5 @@
+/** CSS global **/
+
 html { font-size: 15px; }
 html, body { margin: 0; padding: 0; min-height: 100%; }
 body { 
@@ -9,21 +11,57 @@ body {
 	padding: 20px;
 	font-family: Helvetica, Arial, Sans-Serif;
 }
-.referer-warning {
-  background: black;
-  box-shadow: 0 2px 5px rgba(0,0,0, 0.5);
-  padding: 0.75em;
-  color: white;
-  text-align: center;
-  font-family: var(--cp-font-family);
-  line-height: 1.2;
-  font-size: 1rem;
-  position: relative;
-  z-index: 2;
-}
-.referer-warning h1 { font-size: 1.2rem; margin: 0; }
-.referer-warning a { color: #56bcf9; } /* $linkColorOnBlack */
 
+
+/** header du site **/
+
+header {
+    padding: 60px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    font-size: 30px;
+}
+footer{
+    background-color: #333;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    bottom: 0;
+    height:30px;
+}
+/** menu de navigation du site **/
+ul {
+
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 50px;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li { float: left; }
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #1abc9c on hover */
+li a:hover { background-color: #1abc9c; }
+
+/* page en cours dans le menu */
+.active { background-color: oldlace ; }
+li.active a { color:black; }
+
+/** ================================================================================================================= */
+/** terrain de jeux **/
 
 #app {
   display: grid;
@@ -36,11 +74,6 @@ body {
   margin: 0 auto;
 }
 
-i.fas {
-  font-size: 40px;
-  color: #333;
-}
-
 .victoryState {
   grid-column-start: 1;
   grid-column-end: -1;
@@ -48,6 +81,13 @@ i.fas {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+/** animation des cartes */
+
+i.fas {
+    font-size: 40px;
+    color: #333;
 }
 
 .card {
@@ -109,6 +149,8 @@ i.fas {
   }
 }
 
+/** icones des cartes generales */
+
 .mem-icon{
 	
 	height:50px;
@@ -116,6 +158,8 @@ i.fas {
 	background-size:50px;
 	background-image: url("../img/cards.png");
 }
+
+/** icones des cartes specifiques */
 
 .mem-icon.pomme-rouge	{	background-position : 0px 0px;		}	
 .mem-icon.banane		{	background-position : 0px -50px;	}	
@@ -136,6 +180,9 @@ i.fas {
 .mem-icon.mangue		{	background-position : 0px -800px;	}
 .mem-icon.cerise-jaune	{	background-position : 0px -850px;	}
 
+/**
+ barre de progression
+ */
 #myProgress {
   width: 100%;
   background-color: #ddd;
@@ -150,47 +197,10 @@ i.fas {
   color: white;
 }
 
-header {
-  padding: 60px;
-  text-align: center;
-  background: #1abc9c;
-  color: white;
-  font-size: 30px;
-}
+/** ================================================================================================================= */
+
+/** tableau des classements */
 
 tbody tr:nth-child(even) {background: #CCC}
-tbody tr:nth-child(odd) {background: #FFF}
+tbody tr:nth-child(odd) {background: none }
 
-ul {
-
-  position: -webkit-sticky; /* Safari */
-  position: sticky;
-  top: 0;
-
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-}
-
-li {
-  float: left;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-/* Change the link color to #111 (black) on hover */
-li a:hover {
-  background-color: #111;
-}
-
-.active {
-  background-color: #1abc9c;
-}
