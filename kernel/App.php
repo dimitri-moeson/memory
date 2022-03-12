@@ -54,12 +54,13 @@
         }
 
         /**
-         * Config constructor.
+         * App constructor.
+         * importe e fichier de config
          * @param $file
          */
         private function __construct()
         {
-            $this->settings = parse_ini_file( ROOT."/config/db.ini", true); //require $file;
+            $this->settings = parse_ini_file( ROOT."/config/db.ini", true);
         }
 
         /**

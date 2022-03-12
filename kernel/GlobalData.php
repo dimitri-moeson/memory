@@ -49,6 +49,7 @@
         }
 
         /**
+         * retourne l'integralité de la requete utilisateur
          * @return mixed
          */
         public function content() :array
@@ -60,6 +61,7 @@
         }
 
         /**
+         * verifie l'existence d'une variable
          * @param $key
          * @return bool
          */
@@ -79,6 +81,8 @@
         }
 
         /**
+         * recupere une variable si elle existe,
+         * sinon, retourne la valeur par defaut
          * @param $key
          * @param null $default
          * @return null
@@ -99,6 +103,7 @@
         }
 
         /**
+         * modifie ou crée une variable
          * @param $key
          * @param $value
          * return bool
@@ -116,6 +121,7 @@
         }
 
         /**
+         * supprime une variable
          * @param $key
          * @return bool
          */

@@ -17,7 +17,8 @@
 
         /**
          * Builder constructor.
-         * @param $classname
+         *
+         * @param $classname => FROM de la requetez
          */
         public function __construct($classname )
         {
@@ -31,11 +32,11 @@
         }
 
         /**
+         * les chaines saisies en parametres sont recuperés pour integrer le select de la requete
          * @return $this
          */
         public function select() :Builder
         {
-
             foreach ( func_get_args() as $arg )$this->fields[] = $arg ;
 
             return $this ;
@@ -43,6 +44,7 @@
         }
 
         /**
+         * fait un count sur le champs saisie en parametre
          * @param $fields
          * @param bool $distinct
          * @param null $alias
@@ -63,6 +65,7 @@
         }
 
         /**
+         * ajoute un regroupement des resultats de la requete
          * @return $this
          */
         public function group():Builder
@@ -75,6 +78,7 @@
         }
 
         /**
+         * ajoute une condition à la requete
          * @return $this
          */
         public function where():Builder
@@ -87,6 +91,7 @@
         }
 
         /**
+         * ajoute un ordre de resultat à la requete
          * @param $order
          * @param string $sens
          * @return $this
@@ -101,17 +106,19 @@
         }
 
         /**
+         * ajoute une limite de résultat à la requete. doit etre superieur à 1
          * @param $limit
          * @return $this
          */
         public function limit($limit):Builder
         {
-            $this->limit = $limit ;
+            if($limit > 1 )$this->limit = $limit ;
 
             return $this ;
         }
 
         /**
+         * convertt automatiquement l'ojet en chaine de caractere.
          * @return string
          */
         public function __toString() :string
@@ -146,6 +153,7 @@
         }
 
         /**
+         * execute la requete construite en appelant la classe DataBase
          * @param bool $one
          * @param null $attrib
          * @param bool $modif

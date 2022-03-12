@@ -19,15 +19,23 @@
         }
 
         /**
-         * etablit le chemin du fichier $class_name et l'inclut automatiquement
+         * etablit le chemin du fichier $file_name et l'inclut automatiquement
+         * verifie la classe $class_name
+         * interromp le traitement en cas d'absence de la classe
          * @param $class_name
          */
         static function call($class_name){
 
-            $class_name = str_replace("\\","/", $class_name);
+            $file_name = str_replace("\\","/", $class_name);
 
-            if(file_exists(ROOT."/".$class_name.".php"))
-                require ROOT."/".$class_name.".php";
+            if(!file_exists(ROOT."/".$file_name.".php"))
+                throw new \Exception('File ' . $file_name . ' doesn\'t exist');
+
+            require ROOT."/".$file_name.".php";
+
+            if (!class_exists($class_name)) {
+                throw new \Exception('Class ' . $class_name . ' doesn\'t exist');
+            }
         }
     }
 }
