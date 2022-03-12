@@ -21,7 +21,7 @@
 
         <nav>
             <ul>
-                <li <?php echo $view ==="game" ? "class='active'" : "" ?> ><a href="?p=game" onclick="return confirm('nouvelle partie ?')" >Jeu</a></li>
+                <li <?php echo $view ==="game" ? "class='active'" : "" ?> ><a href="?p=game" onclick="return confirm('nouvelle partie ?')" >Nouveau Jeu</a></li>
                 <li <?php echo $view ==="ladder" ? "class='active'" : "" ?> ><a href="?p=ladder">Classement</a></li>
             </ul>
         </nav>

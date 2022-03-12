@@ -45,7 +45,7 @@ ul {
     background-color: #333;
 }
 
-li { float: left; }
+li { float: left; margin-top:2px; }
 li a {
     display: block;
     color: white;
@@ -53,12 +53,21 @@ li a {
     padding: 14px 16px;
     text-decoration: none;
 }
-
+li:hover{ margin-top: -2px; padding-bottom: 4px}
 /* Change the link color to #1abc9c on hover */
-li a:hover { background-color: #1abc9c; }
+li a:hover {
+    background-color: #1abc9c;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
 
 /* page en cours dans le menu */
-.active { background-color: oldlace ; }
+.active {
+    background-color: oldlace ;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+
+}
 li.active a { color:black; }
 
 /** ================================================================================================================= */
