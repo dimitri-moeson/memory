@@ -6,13 +6,39 @@
      */
     class Builder
     {
+        /**
+         * @var array $fields => SELECT
+         */
         private $fields = array();
+
+        /**
+         * @var array $sources => FROM
+         */
         private $sources = array();
+
+        /**
+         * @var array $conditions => WHERE
+         */
         private $conditions = array();
+
+        /**
+         * @var array $ordres => ORDER BY
+         */
         private $ordres = array();
+
+        /**
+         * @var array $groups => GROUP BY
+         */
         private $groups = array();
 
+        /**
+         * @var $limit => LIMIT
+         */
         private $limit;
+
+        /**
+         * @var string|bool $classname
+         */
         private static $classname;
 
         /**
@@ -26,7 +52,7 @@
 
             if($classname !== false)
             {
-                $table = strtolower(str_replace("app\\model\\", "", self::$classname));
+                $table = strtolower(str_replace("app\model\\", "", self::$classname));
 
                 $this->from($table);
             }

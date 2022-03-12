@@ -19,6 +19,11 @@
         protected $date_create ;
 
         /**
+         * @var string $table
+         */
+        protected $table = null ;
+
+        /**
          * Entity constructor.
          */
         protected function __construct()
@@ -103,17 +108,18 @@
         {
             $vars = get_object_vars($this);
 
-            $table =  strtolower(str_replace("app\\model\\","", get_called_class() ));
-
             $attributes = array();
             $values = array();
 
             foreach( $vars as $ch => $va)
             {
-                if ($va !== null && $ch !== 'id' && $ch !== 'date_create')
+                if($ch !== 'id' && $ch !== 'date_create' && $ch !== 'table')
                 {
-                    $attributes[$ch] = " `".$ch."` = :".$ch."" ;
-                    $values[$ch] = $va ;
+                    if ($va !== null )
+                    {
+                        $attributes[$ch] = " `" . $ch . "` = :" . $ch . "";
+                        $values[$ch] = $va;
+                    }
                 }
             }
 
@@ -121,11 +127,11 @@
 
             if($this->getId() == 0 ){
 
-                $statement = "insert into ".$table." set ".$set." ; " ;
+                $statement = "insert into ".$this->getTable()." set ".$set." ; " ;
 
             }else {
 
-                $statement = "update `".$table."` set ".$set." where `id` = :id and `date_delete` is null ; ";
+                $statement = "update `".$this->getTable()."` set ".$set." where `id` = :id and `date_delete` is null ; ";
                 $values['id'] = $this->getId() ;
             }
 
@@ -133,14 +139,15 @@
 
                 $this->alter($statement, $values);
 
-                if($this->getId() == 0 )
+                if($this->getId() === 0 )
                 {
                     /**
                      *  retourne le dernier enregistrement en base
                      */
                     return App::getInstance()->getDB()->lastID();
                 }
-                else {
+                else
+                {
                     /**
                      * retourne l'ID de l'Entity
                      */
@@ -159,9 +166,7 @@
          */
         public function delete()
         {
-            $table =  strtolower(str_replace("app\\model\\","", get_called_class() ));
-
-            $statement = "update `".$table."` set `date_delete` = :date_delete where `id` = :id and `date_delete` is null ; ";
+            $statement = "update `".$this->getTable()."` set `date_delete` = :date_delete where `id` = :id and `date_delete` is null ; ";
 
             $values['id'] = $this->getId() ;
             $values['date_delete'] = date("Y-m-d H:i:s") ;
@@ -170,6 +175,14 @@
                 return $this->alter($statement, $values);
             } catch (Exception $e) {
             }
+        }
+
+        private function getTable()
+        {
+            if($this->table === null)
+                $this->table = strtolower(str_replace("app\model\\","", get_called_class() ));
+
+            return $this->table ;
         }
 
         /**
