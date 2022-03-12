@@ -1,5 +1,8 @@
 
-    // Liste des balises CSS utilisant les illustrations
+    /**
+     * Liste des balises CSS utilisant les illustrations
+     * @type {string[]}
+     */
     const icons = [
 
         'mem-icon pomme-rouge',
@@ -55,8 +58,6 @@
      */
     var interval ;
 
-    let percent;
-
     /**
      *
      * @type {number} temps écoulés
@@ -73,12 +74,6 @@
         },
 
         methods: {
-
-            alert(){
-
-                alert("on vue launching....");
-
-            },
 
             /** Create cards array based on icons, shuffle them **/
             cardsShuffle() {
@@ -101,8 +96,6 @@
 
                 // on demarre les compteurs
 	            tryCount = 0 ;
-		        progress = 0 ;
-
 
                 // on lance les timers
                 this.countdown();
@@ -120,10 +113,12 @@
 
                     // when two cards are up, check if they match or turn them down
                     if (this.cardCount.cardsUp === 2) {
-                        this.runing = true;
 
 		                // on incremente le nombre d'essais
 		                tryCount++;
+		                document.getElementById("tryCount").innerHTML = tryCount+" essais";
+
+                        this.runing = true;
 
 		                setTimeout(() => {
                             let match = checkMatch(this.cardCount.icons);
@@ -134,11 +129,14 @@
                                     card.down = true;
                                 }
                             });
+
                             this.runing = false;
                         }, 500);
                     }
                 }
             },
+
+
 
             /** gestion du chronometre et de la progress bar **/
             countdown() {
@@ -147,41 +145,22 @@
 
                     restTimes--;
 
-                    var totalSeconds =  parseInt(maxTimes) - parseInt(restTimes) ;
+                    let totalSeconds =  parseInt(maxTimes) - parseInt(restTimes) ;
 
                     /** progress bar */
-                    var progress = (totalSeconds/maxTimes)*100;
-                    document.getElementById("myBar").style.width = progress + "%";
+                    let progress = (totalSeconds/maxTimes)*100;
 
-                     if(progress > 66 ) document.getElementById("myBar").style.backgroundColor = 'red';
+                     if(progress >= 66 && progress < 99 ) document.getElementById("myBar").style.backgroundColor = 'red';
                 else if(progress >= 33 && progress < 66 ) document.getElementById("myBar").style.backgroundColor = 'orange';
-                else if(progress > 0 && progress < 33 ) document.getElementById("myBar").style.backgroundColor = 'green';
+                else if(progress >=  0 && progress < 33 ) document.getElementById("myBar").style.backgroundColor = 'green';
 
                     document.getElementById("myBar").innerHTML = pad(parseInt(restTimes / 60)) + ":" + pad(restTimes % 60) ;
-
-                    if (restTimes === 0) {
-
-                        clearInterval(interval);
-
-                        var nom = prompt("Fin du temps imparti !"+"\n"+" Votre nom ?");
-
-                        var totalSeconds =  parseInt(maxTimes) - parseInt(restTimes) ;
-
-                        document.getElementById("input-nom").value = nom ;
-                        document.getElementById("input-timer").value = totalSeconds ;
-                        document.getElementById("input-try").value = tryCount ;
-                        document.getElementById("input-status").value = "failure";
-                        document.getElementById("form-game").submit();
-
-                        this.gameRecord();
-
-                        return;
-                    }
+                    document.getElementById("myBar").style.width = progress + "%";
 
                     /** formate les timers **/
                     function pad(val)
                     {
-                        var valString = val + "";
+                        let valString = val + "";
                         if(valString.length < 2)
                         {
                             return "0" + valString;
@@ -190,6 +169,21 @@
                         {
                             return valString;
                         }
+                    }
+
+                    if (restTimes === 0) {
+
+                        clearInterval(interval);
+
+                        let nom = prompt("Fin du temps imparti !"+"\n"+" Votre nom ?");
+
+                        document.getElementById("input-nom").value = nom ;
+                        document.getElementById("input-timer").value = totalSeconds ;
+                        document.getElementById("input-try").value = tryCount ;
+                        document.getElementById("input-status").value = "failure";
+                        document.getElementById("form-game").submit();
+
+                        return;
                     }
 
                 }, 1000);
@@ -218,13 +212,7 @@
                         cardMatchedCount++;
                     }
                 });
-
-                percent = parseFloat((cardMatchedCount / this.cards.length)*100) ;
 	  				  
-		        document.getElementById("tryCount").innerHTML = tryCount+" essais";
-
-		        setInterval(this.frame, 10);
-
 		        return {
                     cardsUp: cardUpCount,
                     cardsMatched: cardMatchedCount,
@@ -237,8 +225,8 @@
 
                 if (restTimes > 0 && this.cardCount.cardsMatched === this.cards.length) {
 
-                    var nom = prompt("Victoie !"+"\n"+"Votre nom ?");
-                    var totalSeconds =  parseInt(maxTimes) - parseInt(restTimes) ;
+                    let nom = prompt("Victoire !"+"\n"+"Votre nom ?");
+                    let totalSeconds =  parseInt(maxTimes) - parseInt(restTimes) ;
 
                     /** record game ... **/
 
@@ -249,11 +237,8 @@
 
                     document.getElementById("form-game").submit();
                 }
-                else {
 
-                    return false ;
-
-                }
+                return true ;
             }
         }
     });

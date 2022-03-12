@@ -79,11 +79,11 @@
                     {
                         $req->bindValue(":" . $key, "".$value , PDO::PARAM_INT );
                     }
-                    elseif (is_a($value,'DateTime'))
+                elseif (is_a($value,'DateTime'))
                     {
                         $req->bindValue(":" . $key, "".$value->format("Y-m-d H:i:s") , PDO::PARAM_STR );
                     }
-                    else
+                else
                     {
                         $req->bindValue(":" . $key, "".$value , PDO::PARAM_STR);
                     }

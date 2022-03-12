@@ -63,7 +63,7 @@
 
             list($cnt_name,$action) = explode(".",$p);
 
-            $controller_name = "\\app\\Controller\\".ucfirst($cnt_name)."Controller";
+            $controller_name = "\\app\\controller\\".ucfirst($cnt_name)."Controller";
 
             /**
              * @var Controller $controller

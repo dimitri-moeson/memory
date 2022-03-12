@@ -6,8 +6,10 @@
         <i :class="'fas ' + card.icon"></i>
     </div>
 
+
+    <p class="victoryState" v-if="victory">&nbsp;</p>
+
     <div id="tryCount"></div>
-    <div id="countdown"></div>
 
 </div>
 
