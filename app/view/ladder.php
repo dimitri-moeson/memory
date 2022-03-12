@@ -15,8 +15,7 @@
             <td><?php echo $ladder->getNom(); ?></td>
             <td><?php echo $ladder->getTimer()->format("i:s");?></td>
             <td><?php echo $ladder->getTry();?></td>
-            <td><?php echo $ladder->getStatus();?></td>
-            <td><?php echo $ladder->getDateCreate()->format("d/m/Y - H:i:s"); ?></td>
+            <td><?php echo $ladder->getDateCreate()->format("d/m/Y - H:i"); ?></td>
         </tr>
     <?php } ?>
     </tbody>
@@ -27,7 +26,6 @@
         <th>Nom</th>
         <th>Timer</th>
         <th>Essais</th>
-        <th>Statut</th>
         <th>Date</th>
     </tr>
     </thead>
