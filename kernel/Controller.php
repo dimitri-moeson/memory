@@ -48,8 +48,7 @@
 
             header("Status: 301 Moved Permanently", false, 301);
             header("location:?p=".$location);
-            exit();
-            die("redirection : ".$location);
+            $this->render("404");
 
         }
 
@@ -60,18 +59,7 @@
         protected function notfound($view){
 
             header("HTTP/1.1 404 Not Found");
-
-            $content = "<h2>la page demandée n'existe pas</h2>";
-
-            /**
-             * $content est affiché dans le template HTML
-             */
-            require ROOT."/app/view/template/default.php";
-
-            /**
-             * on bloque tout une fois le résultat final obtenu
-             */
-            die();
+            $this->render("404");
         }
 
         /**
