@@ -38,14 +38,30 @@
         }
     };
 
+    /**
+     *
+     * @type {number} compte le nombre de paire retournée
+     */
     var tryCount = 0 ;
 
-    var maxTimes = 150 , restTimes = 150 ;
+    /**
+     *
+     * @type {number} temps imparti de 5 minutes
+     */
+    var maxTimes = 300  ;
 
+    /**
+     * gestionnaire du compte à rebours
+     */
     var interval ;
 
     let percent;
 
+    /**
+     *
+     * @type {number} temps écoulés
+     */
+    var restTimes = maxTimes ;
 
     new Vue({
 
@@ -87,24 +103,9 @@
 	            tryCount = 0 ;
 		        progress = 0 ;
 
-		        // on lance les timers
+
+                // on lance les timers
                 this.countdown();
-            },
-
-            /** record game ... **/
-            gameRecord() {
-
-                var nom = prompt("Victoie !"+"\n"+"Votre nom ?");
-
-                var totalSeconds =  parseInt(maxTimes) - parseInt(restTimes) ;
-
-                document.getElementById("input-nom").value = nom ;
-                document.getElementById("input-timer").value = totalSeconds ;
-                document.getElementById("input-try").value = tryCount ;
-
-                document.getElementById("form-game").submit();
-
-                return;
             },
 
             /** click sur une carte **/
@@ -234,13 +235,19 @@
             /** update victory state **/
             victory () {
 
-                console.log("vict restTimes"+restTimes);
-
                 if (restTimes > 0 && this.cardCount.cardsMatched === this.cards.length) {
 
-                    document.getElementById("input-status").value = "victory" ;
+                    var nom = prompt("Victoie !"+"\n"+"Votre nom ?");
+                    var totalSeconds =  parseInt(maxTimes) - parseInt(restTimes) ;
 
-                    return true;
+                    /** record game ... **/
+
+                    document.getElementById("input-status").value = "victory" ;
+                    document.getElementById("input-nom").value = nom ;
+                    document.getElementById("input-timer").value = totalSeconds ;
+                    document.getElementById("input-try").value = tryCount ;
+
+                    document.getElementById("form-game").submit();
                 }
                 else {
 

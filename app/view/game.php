@@ -6,11 +6,6 @@
         <i :class="'fas ' + card.icon"></i>
     </div>
 
-
-    <p class="victoryState" v-if="victory">
-        <button class="btn btn-primary" v-on:click="gameRecord">Enregistrer</button>
-    </p>
-
     <div id="tryCount"></div>
     <div id="countdown"></div>
 
