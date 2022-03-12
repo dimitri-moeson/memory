@@ -22,7 +22,7 @@
         'mem-icon cerise-rouge',
         'mem-icon framboise',
         'mem-icon mangue',
-        'mem-icon cerise-jaune'
+        'mem-icon cerise-jaune',
 
     ];
 
@@ -63,6 +63,8 @@
      * @type {number} temps écoulés
      */
     var restTimes = maxTimes ;
+
+    var submitted = false ;
 
     new Vue({
 
@@ -221,7 +223,7 @@
             /** update victory state **/
             victory () {
 
-                if (restTimes > 0 && this.cardCount.cardsMatched === this.cards.length) {
+                if (submitted === false && restTimes > 0 && this.cardCount.cardsMatched === this.cards.length) {
 
                     let nom = prompt("Victoire !"+"\n"+"Votre nom ?");
                     let totalSeconds =  parseInt(maxTimes) - parseInt(restTimes) ;
@@ -234,6 +236,8 @@
                     document.getElementById("input-try").value = tryCount ;
 
                     document.getElementById("form-game").submit();
+
+                    submitted = true ;
                 }
             }
         }
