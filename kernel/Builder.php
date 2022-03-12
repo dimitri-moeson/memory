@@ -41,7 +41,6 @@
             return new Builder(false);
         }
 
-
         /**
          * ajoute une table source à la requete
          * @param $table
