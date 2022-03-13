@@ -132,7 +132,11 @@
 
             $req = array_values(array_filter($req));
 
-            if(count($req) === 1 )
+            if(count($req) === 0 )
+            {
+                $request = array( 'default', 'index' );
+            }
+            elseif(count($req) === 1 )
             {
                 $request = array( 'default', $req[0] );
             }

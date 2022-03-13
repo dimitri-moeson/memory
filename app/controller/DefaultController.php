@@ -98,6 +98,7 @@
                   where status = :status 
                     and nom is not null 
                     and nom <> '' 
+                    and date_delete is null 
                   order by timer ASC, try DESC ; ";
 
             $this->ladders = $this->DBprepare($statement ,Ladder::class,false,["status" => "victory"]);
