@@ -1,4 +1,9 @@
-<form id="form-game" method="post" action="?p=save" >
+<?php
+
+use kernel\Request;
+
+?>
+<form id="form-game" method="post" action="<?php echo \kernel\Request::url(["enregistrement"]) ?>" >
 
     <input type="hidden" id="input-timer" name="timer"/>
     <input type="hidden" id="input-try" name="try"/>
@@ -32,5 +37,5 @@
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17-beta.0/vue.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.min.js'></script>
-<script src="scripts/scripts.js" id="rendered-js" ></script>
+<script src="<?php echo Request::url(["scripts","scripts.js"], true ) ?>" id="rendered-js" ></script>
 

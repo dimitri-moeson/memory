@@ -1,7 +1,7 @@
 <?php
 
 use kernel\App;
-use kernel\GlobalData;
+use kernel\Controller;
 
 /**
  * Racine : chemin des fichiers par defaut
@@ -21,15 +21,8 @@ require ROOT."/kernel/App.php";
 App::getInstance()->load();
 
 /**
- * recuperation de la requete utilisateur
- */
-$p = GlobalData::getInstance()->get('p','index');
-
-/**
  * execution du controller principale
  */
-\kernel\Controller::execute($p);
-
-
+Controller::execute();
 
 ?>

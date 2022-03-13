@@ -28,14 +28,13 @@
 
             $file_name = str_replace("\\","/", $class_name);
 
-            if(!file_exists(ROOT."/".$file_name.".php"))
-                throw new \Exception('File ' . $file_name . ' doesn\'t exist');
+            if(file_exists(ROOT."/".$file_name.".php"))
+                require ROOT."/".$file_name.".php";
 
-            require ROOT."/".$file_name.".php";
+            if (class_exists($class_name))
+                return true;
 
-            if (!class_exists($class_name)) {
-                throw new \Exception('Class ' . $class_name . ' doesn\'t exist');
-            }
+            return false ;
         }
     }
 }

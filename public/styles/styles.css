@@ -177,24 +177,24 @@ i.fas {
 
 /** icones des cartes specifiques */
 
-.mem-icon.pomme-rouge	{	background-position : 0px 0px;		}	
-.mem-icon.banane		{	background-position : 0px -50px;	}	
-.mem-icon.orange		{	background-position : 0px -100px;	}
-.mem-icon.citron-vert	{	background-position : 0px -150px;	}
-.mem-icon.goyave		{	background-position : 0px -200px;	}
-.mem-icon.abricot		{	background-position : 0px -250px;	}
-.mem-icon.citron-jaune	{	background-position : 0px -300px;	}
-.mem-icon.fraise		{	background-position : 0px -350px;	}
-.mem-icon.pomme-verte	{	background-position : 0px -400px;	}
-.mem-icon.peche			{	background-position : 0px -450px;	}
-.mem-icon.raisin		{	background-position : 0px -500px;	}
-.mem-icon.pasteque		{	background-position : 0px -550px;	}
-.mem-icon.prune			{	background-position : 0px -600px;	}
-.mem-icon.poire			{	background-position : 0px -650px;	}
-.mem-icon.cerise-rouge	{	background-position : 0px -700px;	}
-.mem-icon.framboise		{	background-position : 0px -750px;	}
-.mem-icon.mangue		{	background-position : 0px -800px;	}
-.mem-icon.cerise-jaune	{	background-position : 0px -850px;	}
+    .mem-icon.pomme-rouge	{	background-position : 0 0;		}
+    .mem-icon.banane		{	background-position : 0 -50px;	}
+    .mem-icon.orange		{	background-position : 0 -100px;	}
+    .mem-icon.citron-vert	{	background-position : 0 -150px;	}
+    .mem-icon.goyave		{	background-position : 0 -200px;	}
+    .mem-icon.abricot		{	background-position : 0 -250px;	}
+    .mem-icon.citron-jaune	{	background-position : 0 -300px;	}
+    .mem-icon.fraise		{	background-position : 0 -350px;	}
+    .mem-icon.pomme-verte	{	background-position : 0 -400px;	}
+    .mem-icon.peche			{	background-position : 0 -450px;	}
+    .mem-icon.raisin		{	background-position : 0 -500px;	}
+    .mem-icon.pasteque		{	background-position : 0 -550px;	}
+    .mem-icon.prune			{	background-position : 0 -600px;	}
+    .mem-icon.poire			{	background-position : 0 -650px;	}
+    .mem-icon.cerise-rouge	{	background-position : 0 -700px;	}
+    .mem-icon.framboise		{	background-position : 0 -750px;	}
+    .mem-icon.mangue		{	background-position : 0 -800px;	}
+    .mem-icon.cerise-jaune	{	background-position : 0 -850px;	}
 
 /**
  barre de progression

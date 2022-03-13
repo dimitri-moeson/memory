@@ -8,11 +8,13 @@
     /**
      * Class DefaultController
      * @package app\controller
+     * @Route('popot')
      */
     class DefaultController extends Controller
     {
         /**
          * enregistrement de la partie puis redirection vers le classement
+         * @Route('enregistrement')
          */
         function save()
         {
@@ -39,12 +41,13 @@
                 $ladd->save();
 
                 /** on recharge la page */
-                $this->redirect("ladder");
+                $this->redirect(["ladder"]);
             }
         }
 
         /**
          * classement des joueurs
+         * @Route('classement')
          * @throws \Exception
          */
         function ladder()
@@ -85,6 +88,7 @@
         }
 
         /**
+         * @Route('')
          * page par defaut : classement des joueurs
          */
         function index()
@@ -105,6 +109,7 @@
         }
 
         /**
+         * @Route('jeu')
          * page du jeu
          */
         function game()

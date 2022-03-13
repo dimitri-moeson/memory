@@ -42,14 +42,13 @@
 
         /**
          * redirection PHP
-         * @param $location
+         * @param array $location
          */
-        protected function redirect($location)
+        protected function redirect($location = array())
         {
             header("Status: 301 Moved Permanently", false, 301);
-            header("location:?p=".$location);
+            header("location:".Request::url($location));
             $this->render("404");
-
         }
 
         /**
@@ -95,22 +94,13 @@
          * puis generation et affichage du rendu HTML
          * @param $p
          */
-        public static function execute($p)
+        public static function execute()
         {
-            $request = explode(".",$p);
+            Request::getInstance()->dispatch();
 
-            if(count($request) === 2 )
-            {
-                list($cnt_name, $action) = $request;
-            }
-            elseif(count($request) === 1 )
-            {
-                $cnt_name = 'default';
-                $action = $request[0];
-            }
+            $controller_name = Request::getInstance()->getCntName();
 
-            $controller_name = "app\controller\\".ucfirst($cnt_name)."Controller";
-
+            $action = Request::getInstance()->getAction();
             /**
              * @var Controller $controller
              */
