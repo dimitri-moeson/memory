@@ -61,7 +61,7 @@
          */
         protected function DBquery($statement, $class_name = null ,  $one = false)
         {
-            return App::getInstance()->getDB()->query_init()->query($statement,$class_name,false  );
+            return App::getInstance()->getDB()->query_init()->query($statement,$class_name,$one  );
         }
 
         /**
@@ -75,7 +75,7 @@
          */
         protected function DBprepare($statement, $class_name = null ,  $one = false, $attrib = [])
         {
-            return App::getInstance()->getDB()->query_init()->prepare($statement,$class_name,false , $attrib,false  );
+            return App::getInstance()->getDB()->query_init()->prepare($statement,$class_name,$one , $attrib,false  );
         }
 
         /**
