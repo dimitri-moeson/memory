@@ -8,7 +8,7 @@
     /**
      * Class DefaultController
      * @package app\controller
-     * @Route('popot')
+     * @Route('memoire')
      */
     class DefaultController extends Controller
     {
