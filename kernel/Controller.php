@@ -53,6 +53,33 @@
         }
 
         /**
+         * raccourci pour le lancement de requete simple
+         * @param $statement
+         * @param null $class_name
+         * @param bool $one
+         * @return array
+         * @throws \Exception
+         */
+        protected function DBquery($statement, $class_name = null ,  $one = false)
+        {
+            return App::getInstance()->getDB()->query_init()->query($statement,$class_name,false  );
+        }
+
+        /**
+         * raccourci pour le lancement de requete preparée
+         * @param $statement
+         * @param null $class_name
+         * @param bool $one
+         * @param array $attrib
+         * @return array|bool|Entity
+         * @throws \Exception
+         */
+        protected function DBprepare($statement, $class_name = null ,  $one = false, $attrib = [])
+        {
+            return App::getInstance()->getDB()->query_init()->prepare($statement,$class_name,false , $attrib,false  );
+        }
+
+        /**
          * gestion des erreurs 404
          * @param $view
          */

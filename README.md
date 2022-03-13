@@ -10,8 +10,19 @@ web memory game
 
 - Routes : `{cnt_name}.{action}`
 
+- Controllers :
+    + appel à la base (2 méthodes) : 
+        - SQL natif
+            + `$this->DBprepare(requete)`
+        - requete sur les classes:
+            + `Builder->execute()`
+
 - Vues/Templates :
     + dans le dossier `app/view/`
+    + les données du controller sont "_extract_" en variables simples 
+        - `$this->variable` {controller} devient `$variable` {view}
+    + modifier la vue par defaut dans un contrôleur :
+       ` $this->render('view');` 
 
 - BDD :
     + Fichier de config `config/db.ini`

@@ -89,7 +89,18 @@
          */
         function index()
         {
-            $this->ladder();
+            $statement = "select * 
+                   from ladder 
+                  where status = :status 
+                    and nom is not null 
+                    and nom <> '' 
+                  order by timer ASC, try DESC ; ";
+
+            $this->ladders = $this->DBprepare($statement ,Ladder::class,false,["status" => "victory"]);
+
+            $this->count = new \stdClass();
+            $this->count->cnt = count($this->ladders);
+
             $this->render(  "ladder");
         }
 
