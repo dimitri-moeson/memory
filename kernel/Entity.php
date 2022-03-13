@@ -177,7 +177,11 @@
             }
         }
 
-        private function getTable()
+        /**
+         * retourne la table
+         * @return string
+         */
+        private function getTable():string
         {
             if($this->table === null)
                 $this->table = strtolower(str_replace("app\model\\","", get_called_class() ));

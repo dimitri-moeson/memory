@@ -159,7 +159,7 @@
         }
 
         /**
-         * convertt automatiquement l'ojet en chaine de caractere.
+         * convert automatiquement l'ojet en chaine de caractere.
          * @return string
          */
         public function __toString() :string

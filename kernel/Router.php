@@ -33,7 +33,7 @@
          * @param ReflectionClass|ReflectionMethod $obj
          * @return bool|mixed
          */
-        private function pattern_route($obj)
+        private function pattern_route($obj):string
         {
             $Comment = $obj->getDocComment();
 
@@ -56,7 +56,7 @@
          * @param $cnt
          * @return bool
          */
-        private function analys_class(ReflectionClass $reflectionClass, $cnt )
+        private function analys_class(ReflectionClass $reflectionClass, $cnt ) :bool
         {
             if ($reflectionClass !== false )
             {
@@ -81,7 +81,7 @@
          * @param $act
          * @return bool
          */
-        private function analys_method(ReflectionMethod $reflectionMethod , $act )
+        private function analys_method(ReflectionMethod $reflectionMethod , $act ):bool
         {
             if ($reflectionMethod !== false)
             {
@@ -103,7 +103,7 @@
          * @return array
          * @throws \Exception
          */
-        private function list_cnt()
+        private function list_cnt():array
         {
             $arrayGlob = scandir(realpath(ROOT. '/app/controller/'));
 
@@ -130,7 +130,7 @@
          * @param ReflectionClass $reflectionClass
          * @return array $arrayReflectionMethods
          */
-        private function list_cmd( ReflectionClass $reflectionClass)
+        private function list_cmd( ReflectionClass $reflectionClass):array
         {
             $arrayReflectionMethods = $reflectionClass->getMethods();
 
@@ -143,18 +143,22 @@
         }
 
         /**
-         *
+         * controle la requete utilisateur et retoure le controller - action correspondant
          *
          * @param $request
          * @return array
          * @throws \Exception
          */
-        public function getRoute($request)
+        public function getRoute($request):array
         {
             foreach ($this->list_cnt() as $objectName)
             {
                 try
                 {
+                    /**
+                     * @var Reflection : faire une introspection sur des classes, méthodes et fonctions
+                     * ou encore de récupérer des blocs de commentaires.
+                     */
                     $reflectionClass = new ReflectionClass('app\controller\\' . $objectName);
 
                     if($this->analys_class($reflectionClass, $request[0]))
